@@ -1,0 +1,6 @@
+{
+  "name": "Whānau Coffee",
+  "description": "Café de especialidad, desayunos irresistibles y el mejor ambiente en Garrucha, Almería.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

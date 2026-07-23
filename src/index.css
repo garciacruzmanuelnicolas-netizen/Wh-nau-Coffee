@@ -1,0 +1,144 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --color-coffee-primary: #4B2E2B;
+    --color-coffee-dark: #351F1D;
+    --color-coffee-accent: #6E443F;
+    --color-cream-bg: #FAF6F0;
+    --color-cream-card: #F2EBE1;
+    --color-olive-secondary: #556B2F;
+    --color-olive-light: #8A9A65;
+    --font-serif: 'Playfair Display', Georgia, serif;
+    --font-sans: 'Poppins', 'Inter', system-ui, sans-serif;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: #FAF6F0;
+    color: #1A1716;
+  }
+
+  h1, h2, h3, .font-serif {
+    font-family: var(--font-serif);
+  }
+}
+
+/* Custom Utilities */
+.font-serif {
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+.font-sans {
+  font-family: 'Poppins', 'Inter', sans-serif;
+}
+
+/* Subtle Recycled Paper Texture background option */
+.bg-paper-texture {
+  background-color: #FAF6F0;
+  background-image: radial-gradient(#4B2E2B 0.5px, transparent 0.5px), radial-gradient(#4B2E2B 0.5px, #FAF6F0 0.5px);
+  background-size: 20px 20px;
+  background-position: 0 0, 10px 10px;
+  background-opacity: 0.03;
+}
+
+/* Dark Mode paper texture */
+.dark .bg-paper-texture {
+  background-color: #1B1716;
+  background-image: radial-gradient(#FAF6F0 0.5px, transparent 0.5px), radial-gradient(#FAF6F0 0.5px, #1B1716 0.5px);
+  background-size: 20px 20px;
+  background-position: 0 0, 10px 10px;
+  background-opacity: 0.04;
+}
+
+/* Glassmorphism */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.dark .glass-panel {
+  background: rgba(35, 29, 28, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-panel-dark {
+  background: rgba(26, 23, 22, 0.82);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Coffee Steam Keyframes */
+@keyframes steam {
+  0% {
+    transform: translateY(0) scaleX(1);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.6;
+  }
+  50% {
+    transform: translateY(-25px) scaleX(1.3);
+    opacity: 0.3;
+  }
+  95% {
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(-50px) scaleX(1.8);
+    opacity: 0;
+  }
+}
+
+.steam-particle {
+  animation: steam 3.5s infinite ease-out;
+}
+
+/* Floating Coffee Beans animation */
+@keyframes floatBean {
+  0% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-15px) rotate(15deg);
+  }
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+}
+
+.animate-float-bean-slow {
+  animation: floatBean 6s ease-in-out infinite;
+}
+
+.animate-float-bean-fast {
+  animation: floatBean 4s ease-in-out infinite;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 9px;
+}
+
+::-webkit-scrollbar-track {
+  background: #FAF6F0;
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: #1B1716;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #4B2E2B;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #351F1D;
+}
+

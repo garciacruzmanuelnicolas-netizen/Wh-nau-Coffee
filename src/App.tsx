@@ -56,8 +56,6 @@ export default function App() {
       {/* 3. Sticky Navbar */}
       <Navbar
         onOpenReservation={handleOpenReservation}
-        isDarkMode={isDarkMode}
-        toggleDarkMode={toggleDarkMode}
         isCursorEnabled={isCursorEnabled}
         toggleCursor={toggleCursor}
       />

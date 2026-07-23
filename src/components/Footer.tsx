@@ -23,8 +23,8 @@ export const Footer: React.FC = () => {
           {/* Brand Col */}
           <div className="space-y-4">
             <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 rounded-xl bg-[#4B2E2B] text-amber-200 flex items-center justify-center font-bold text-xl shadow-md border border-amber-300/20">
-                <Coffee className="w-5 h-5" />
+              <div className="w-10 h-10 rounded-2xl bg-[#4B2E2B] text-[#FAF6F0] flex items-center justify-center font-bold text-xl shadow-md border border-amber-900/30">
+                <Coffee className="w-5 h-5 text-[#FAF6F0]" />
               </div>
               <div>
                 <span className="font-serif text-2xl font-bold tracking-tight block leading-none text-white">

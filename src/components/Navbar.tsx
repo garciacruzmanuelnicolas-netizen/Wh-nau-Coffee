@@ -1,20 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Coffee, Menu as MenuIcon, X, Sun, Moon, CalendarCheck, MousePointer } from 'lucide-react';
+import { Coffee, Menu as MenuIcon, X, CalendarCheck, MousePointer } from 'lucide-react';
 import { getCurrentOpeningStatus } from '../utils/timeUtils';
 
 interface NavbarProps {
   onOpenReservation: () => void;
-  isDarkMode: boolean;
-  toggleDarkMode: () => void;
   isCursorEnabled: boolean;
   toggleCursor: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
   onOpenReservation,
-  isDarkMode,
-  toggleDarkMode,
   isCursorEnabled,
   toggleCursor,
 }) => {
@@ -75,8 +71,8 @@ export const Navbar: React.FC<NavbarProps> = ({
             onClick={(e) => handleLinkClick(e, '#hero')}
             className="flex items-center space-x-2.5 group"
           >
-            <div className="w-10 h-10 rounded-xl bg-[#4B2E2B] text-amber-100 flex items-center justify-center shadow-md group-hover:scale-105 transition-transform duration-200">
-              <Coffee className="w-5 h-5" />
+            <div className="w-10 h-10 rounded-2xl bg-[#4B2E2B] text-[#FAF6F0] flex items-center justify-center shadow-md border border-amber-900/30 group-hover:scale-105 transition-transform duration-200">
+              <Coffee className="w-5 h-5 text-[#FAF6F0]" />
             </div>
             <div>
               <span className="font-serif text-xl sm:text-2xl font-bold tracking-tight block leading-none">
@@ -126,15 +122,6 @@ export const Navbar: React.FC<NavbarProps> = ({
               <span className="hidden xl:inline text-[11px]">{isCursorEnabled ? 'Cursor ☕' : 'Cursor Std'}</span>
             </button>
 
-            {/* Theme Toggle */}
-            <button
-              onClick={toggleDarkMode}
-              title={isDarkMode ? 'Modo claro' : 'Modo oscuro'}
-              className="p-2 rounded-lg border border-gray-200/20 hover:bg-black/5 dark:hover:bg-white/10 transition-colors"
-            >
-              {isDarkMode ? <Sun className="w-4 h-4 text-amber-300" /> : <Moon className="w-4 h-4 text-gray-700" />}
-            </button>
-
             {/* Primary CTA - Reserve Table */}
             <button
               onClick={onOpenReservation}
@@ -147,13 +134,6 @@ export const Navbar: React.FC<NavbarProps> = ({
 
           {/* Mobile Menu Button */}
           <div className="flex lg:hidden items-center space-x-2">
-            <button
-              onClick={toggleDarkMode}
-              className="p-2 rounded-lg border border-gray-200/20 text-current"
-            >
-              {isDarkMode ? <Sun className="w-4 h-4 text-amber-300" /> : <Moon className="w-4 h-4" />}
-            </button>
-
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="p-2 rounded-xl bg-[#4B2E2B] text-white focus:outline-none"

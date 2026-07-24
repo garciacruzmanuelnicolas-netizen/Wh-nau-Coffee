@@ -72,7 +72,6 @@ export const Footer: React.FC = () => {
               <li><a href="#nosotros" onClick={(e) => handleLinkClick(e, '#nosotros')} className="hover:text-amber-300 transition-colors">Sobre Nosotros</a></li>
               <li><a href="#menu" onClick={(e) => handleLinkClick(e, '#menu')} className="hover:text-amber-300 transition-colors">Nuestro Menú</a></li>
               <li><a href="#especialidades" onClick={(e) => handleLinkClick(e, '#especialidades')} className="hover:text-amber-300 transition-colors">Especialidades de la Casa</a></li>
-              <li><a href="#galeria" onClick={(e) => handleLinkClick(e, '#galeria')} className="hover:text-amber-300 transition-colors">Galería Fotográfica</a></li>
               <li><a href="#opiniones" onClick={(e) => handleLinkClick(e, '#opiniones')} className="hover:text-amber-300 transition-colors">Opiniones en Google</a></li>
             </ul>
           </div>

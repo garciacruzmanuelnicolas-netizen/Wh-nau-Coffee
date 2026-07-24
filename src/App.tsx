@@ -6,7 +6,6 @@ import { Hero } from './components/Hero';
 import { About } from './components/About';
 import { Menu } from './components/Menu';
 import { Specialties } from './components/Specialties';
-import { Gallery } from './components/Gallery';
 import { Reviews } from './components/Reviews';
 import { Stats } from './components/Stats';
 import { Schedule } from './components/Schedule';
@@ -56,8 +55,6 @@ export default function App() {
       {/* 3. Sticky Navbar */}
       <Navbar
         onOpenReservation={handleOpenReservation}
-        isCursorEnabled={isCursorEnabled}
-        toggleCursor={toggleCursor}
       />
 
       {/* Main Content Sections */}
@@ -74,10 +71,7 @@ export default function App() {
         {/* 7. Specialties Section (Warm Beige) */}
         <Specialties onOpenReservation={handleOpenReservation} />
 
-        {/* 8. Masonry Gallery */}
-        <Gallery />
-
-        {/* 9. Real Google Reviews Carousel */}
+        {/* 8. Real Google Reviews Carousel */}
         <Reviews />
 
         {/* 10. Animated Statistics */}

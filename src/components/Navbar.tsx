@@ -1,18 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Coffee, Menu as MenuIcon, X, CalendarCheck, MousePointer } from 'lucide-react';
+import { Coffee, Menu as MenuIcon, X, CalendarCheck } from 'lucide-react';
 import { getCurrentOpeningStatus } from '../utils/timeUtils';
 
 interface NavbarProps {
   onOpenReservation: () => void;
-  isCursorEnabled: boolean;
-  toggleCursor: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
   onOpenReservation,
-  isCursorEnabled,
-  toggleCursor,
 }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -39,7 +35,6 @@ export const Navbar: React.FC<NavbarProps> = ({
     { name: 'Nosotros', href: '#nosotros' },
     { name: 'Menú', href: '#menu' },
     { name: 'Especialidades', href: '#especialidades' },
-    { name: 'Galería', href: '#galeria' },
     { name: 'Opiniones', href: '#opiniones' },
     { name: 'Horario', href: '#horario' },
     { name: 'Ubicación', href: '#ubicacion' },
@@ -112,16 +107,6 @@ export const Navbar: React.FC<NavbarProps> = ({
               <span>{status.isOpen ? 'Abierto' : 'Cerrado'}</span>
             </span>
 
-            {/* Custom Cursor Toggle */}
-            <button
-              onClick={toggleCursor}
-              title={isCursorEnabled ? 'Desactivar cursor café' : 'Activar cursor café'}
-              className="p-2 rounded-lg border border-gray-200/20 hover:bg-black/5 dark:hover:bg-white/10 transition-colors text-xs flex items-center gap-1"
-            >
-              <MousePointer className="w-4 h-4" />
-              <span className="hidden xl:inline text-[11px]">{isCursorEnabled ? 'Cursor ☕' : 'Cursor Std'}</span>
-            </button>
-
             {/* Primary CTA - Reserve Table */}
             <button
               onClick={onOpenReservation}
@@ -160,14 +145,6 @@ export const Navbar: React.FC<NavbarProps> = ({
                   <span className={`w-2 h-2 rounded-full ${status.isOpen ? 'bg-emerald-500 animate-pulse' : 'bg-rose-500'}`} />
                   <span>{status.statusText} • {status.nextDetail}</span>
                 </span>
-
-                <button
-                  onClick={toggleCursor}
-                  className="text-xs px-2.5 py-1 rounded-md bg-gray-200/60 dark:bg-gray-800 flex items-center gap-1"
-                >
-                  <MousePointer className="w-3.5 h-3.5" />
-                  <span>{isCursorEnabled ? 'Cursor ☕' : 'Cursor Std'}</span>
-                </button>
               </div>
 
               <div className="grid grid-cols-2 gap-3">

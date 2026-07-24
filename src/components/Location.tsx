@@ -32,7 +32,7 @@ export const Location: React.FC = () => {
           >
             <iframe
               title="Ubicación de Whānau Coffee en Garrucha"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3183.123!2d-1.8228!3d37.1822!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd64f1d43f000000%3A0x0!2sCalle+Mayor+150%2C+04630+Garrucha%2C+Almer%C3%ADa!5e0!3m2!1ses!2ses!4v1620000000000!5m2!1ses!2ses"
+              src="https://maps.google.com/maps?q=Wh%C4%81nau%20Coffee%20Garrucha%20Calle%20Mayor&t=&z=16&ie=UTF8&iwloc=&output=embed"
               width="100%"
               height="100%"
               style={{ border: 0 }}

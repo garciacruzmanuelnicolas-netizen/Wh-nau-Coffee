@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Preloader } from './components/Preloader';
-import { CoffeeCursor } from './components/CoffeeCursor';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { About } from './components/About';
@@ -18,7 +17,6 @@ import { MenuItem } from './types';
 
 export default function App() {
   const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
-  const [isCursorEnabled, setIsCursorEnabled] = useState<boolean>(true);
   const [reservationModalOpen, setReservationModalOpen] = useState<boolean>(false);
   const [selectedItemForReservation, setSelectedItemForReservation] = useState<MenuItem | null>(null);
 
@@ -32,7 +30,6 @@ export default function App() {
   }, [isDarkMode]);
 
   const toggleDarkMode = () => setIsDarkMode((prev) => !prev);
-  const toggleCursor = () => setIsCursorEnabled((prev) => !prev);
 
   const handleOpenReservation = () => {
     setSelectedItemForReservation(null);
@@ -45,14 +42,11 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#FAF6F0] dark:bg-[#1A1716] text-[#1A1716] dark:text-[#FAF6F0] font-sans antialiased selection:bg-[#4B2E2B] selection:text-white relative bg-paper-texture">
+    <div className="min-h-screen bg-[#FAF6F0] dark:bg-[#1A1716] text-[#1A1716] dark:text-[#FAF6F0] font-sans antialiased selection:bg-[#4B2E2B] selection:text-white relative bg-paper-texture overflow-x-hidden">
       {/* 1. Preloader */}
       <Preloader />
 
-      {/* 2. Custom Coffee Cursor */}
-      <CoffeeCursor enabled={isCursorEnabled} />
-
-      {/* 3. Sticky Navbar */}
+      {/* 2. Sticky Navbar */}
       <Navbar
         onOpenReservation={handleOpenReservation}
       />

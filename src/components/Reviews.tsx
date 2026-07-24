@@ -22,7 +22,7 @@ export const Reviews: React.FC = () => {
   };
 
   return (
-    <section id="opiniones" className="py-24 bg-[#F2EBE1] dark:bg-[#231F1E] text-[#1A1716] dark:text-[#FAF6F0] relative overflow-hidden">
+    <section id="opiniones" className="scroll-mt-24 py-24 bg-[#F2EBE1] dark:bg-[#231F1E] text-[#1A1716] dark:text-[#FAF6F0] relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}

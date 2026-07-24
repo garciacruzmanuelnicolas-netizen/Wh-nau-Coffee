@@ -15,7 +15,7 @@ export const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="bg-[#1A1716] text-[#FAF6F0] pt-16 pb-12 border-t border-white/10 relative overflow-hidden">
+    <footer className="bg-[#1A1716] text-[#FAF6F0] pt-16 pb-12 border-t border-[#1A1716] relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-12 border-b border-white/10">
@@ -114,7 +114,7 @@ export const Footer: React.FC = () => {
 
         {/* Bottom Bar */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-gray-400 gap-4">
-          <p className="flex items-center space-x-1">
+          <p className="flex items-center space-x-1 flex-wrap justify-center sm:justify-start">
             <span>© {new Date().getFullYear()} Whānau Coffee. Todos los derechos reservados. Hecho con</span>
             <Heart className="w-3.5 h-3.5 text-rose-500 fill-rose-500 mx-1 inline" />
             <span>en Garrucha.</span>
@@ -135,6 +135,13 @@ export const Footer: React.FC = () => {
               Aviso Legal & Cookies
             </button>
           </div>
+        </div>
+
+        {/* Watermark / Signature */}
+        <div className="mt-4 text-left">
+          <span className="text-[10px] text-gray-400/30 hover:text-gray-300/60 transition-opacity tracking-widest uppercase font-sans select-none">
+            Creado por Nicolás
+          </span>
         </div>
 
       </div>

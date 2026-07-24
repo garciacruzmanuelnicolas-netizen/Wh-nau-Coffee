@@ -9,7 +9,7 @@ interface SpecialtiesProps {
 
 export const Specialties: React.FC<SpecialtiesProps> = ({ onOpenReservation }) => {
   return (
-    <section id="especialidades" className="py-24 bg-[#F7F1E8] dark:bg-[#1E1918] text-[#1A1716] dark:text-[#FAF6F0] relative overflow-hidden">
+    <section id="especialidades" className="scroll-mt-24 py-24 bg-[#F7F1E8] dark:bg-[#1E1918] text-[#1A1716] dark:text-[#FAF6F0] relative overflow-hidden">
       
       {/* Background Decorative Graphic */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-amber-200/20 rounded-full blur-3xl pointer-events-none" />

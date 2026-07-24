@@ -44,10 +44,21 @@ export const Navbar: React.FC<NavbarProps> = ({
   const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
     setMobileMenuOpen(false);
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
+
+    // Allow the mobile menu drawer to start closing before calculating scroll position
+    setTimeout(() => {
+      const element = document.querySelector(href);
+      if (element) {
+        const headerOffset = 76;
+        const elementPosition = element.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.scrollY - headerOffset;
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth',
+        });
+      }
+    }, 100);
   };
 
   return (
@@ -133,47 +144,59 @@ export const Navbar: React.FC<NavbarProps> = ({
       {/* Mobile Drawer Menu */}
       <AnimatePresence>
         {mobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            className="fixed top-[68px] left-0 right-0 z-30 bg-[#FAF6F0] dark:bg-[#1A1716] border-b border-gray-200 dark:border-gray-800 shadow-2xl overflow-hidden lg:hidden"
-          >
-            <div className="px-5 py-6 space-y-4">
-              <div className="flex items-center justify-between pb-3 border-b border-gray-200 dark:border-gray-800">
-                <span className={`text-xs px-3 py-1 rounded-full border font-medium flex items-center space-x-1.5 ${status.badgeClass}`}>
-                  <span className={`w-2 h-2 rounded-full ${status.isOpen ? 'bg-emerald-500 animate-pulse' : 'bg-rose-500'}`} />
-                  <span>{status.statusText} • {status.nextDetail}</span>
-                </span>
-              </div>
+          <>
+            {/* Backdrop overlay */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setMobileMenuOpen(false)}
+              className="fixed inset-0 z-20 bg-black/60 backdrop-blur-xs lg:hidden"
+            />
 
-              <div className="grid grid-cols-2 gap-3">
-                {navLinks.map((link) => (
-                  <a
-                    key={link.name}
-                    href={link.href}
-                    onClick={(e) => handleLinkClick(e, link.href)}
-                    className="px-3 py-2.5 rounded-lg bg-white/60 dark:bg-white/5 text-gray-800 dark:text-gray-200 hover:bg-[#4B2E2B] hover:text-white transition-colors text-sm font-medium text-center"
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.25, ease: 'easeInOut' }}
+              className="fixed top-[68px] left-0 right-0 z-30 bg-[#FAF6F0] dark:bg-[#1A1716] border-b border-gray-200 dark:border-gray-800 shadow-2xl overflow-hidden lg:hidden"
+            >
+              <div className="px-5 py-6 space-y-4">
+                <div className="flex items-center justify-between pb-3 border-b border-gray-200 dark:border-gray-800">
+                  <span className={`text-xs px-3 py-1 rounded-full border font-medium flex items-center space-x-1.5 ${status.badgeClass}`}>
+                    <span className={`w-2 h-2 rounded-full ${status.isOpen ? 'bg-emerald-500 animate-pulse' : 'bg-rose-500'}`} />
+                    <span>{status.statusText} • {status.nextDetail}</span>
+                  </span>
+                </div>
+
+                <div className="grid grid-cols-2 gap-3">
+                  {navLinks.map((link) => (
+                    <a
+                      key={link.name}
+                      href={link.href}
+                      onClick={(e) => handleLinkClick(e, link.href)}
+                      className="px-3 py-3 rounded-xl bg-white/80 dark:bg-white/5 text-gray-800 dark:text-gray-200 hover:bg-[#4B2E2B] hover:text-white active:bg-[#351F1D] active:text-white transition-all text-sm font-medium text-center border border-gray-200/50 dark:border-gray-800 shadow-sm active:scale-95 touch-manipulation select-none"
+                    >
+                      {link.name}
+                    </a>
+                  ))}
+                </div>
+
+                <div className="pt-2">
+                  <button
+                    onClick={() => {
+                      setMobileMenuOpen(false);
+                      onOpenReservation();
+                    }}
+                    className="w-full py-3.5 rounded-xl bg-[#4B2E2B] text-white font-medium text-sm flex items-center justify-center space-x-2 shadow-lg active:scale-98 transition-transform touch-manipulation"
                   >
-                    {link.name}
-                  </a>
-                ))}
+                    <CalendarCheck className="w-4 h-4 text-amber-200" />
+                    <span>Reservar Mesa</span>
+                  </button>
+                </div>
               </div>
-
-              <div className="pt-2">
-                <button
-                  onClick={() => {
-                    setMobileMenuOpen(false);
-                    onOpenReservation();
-                  }}
-                  className="w-full py-3 rounded-xl bg-[#4B2E2B] text-white font-medium text-sm flex items-center justify-center space-x-2 shadow-lg"
-                >
-                  <CalendarCheck className="w-4 h-4 text-amber-200" />
-                  <span>Reservar Mesa</span>
-                </button>
-              </div>
-            </div>
-          </motion.div>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </>

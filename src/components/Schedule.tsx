@@ -17,7 +17,7 @@ export const Schedule: React.FC = () => {
   }, []);
 
   return (
-    <section id="horario" className="py-24 bg-[#FAF6F0] dark:bg-[#1A1716] text-[#1A1716] dark:text-[#FAF6F0] relative">
+    <section id="horario" className="scroll-mt-24 py-24 bg-[#FAF6F0] dark:bg-[#1A1716] text-[#1A1716] dark:text-[#FAF6F0] relative">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header */}

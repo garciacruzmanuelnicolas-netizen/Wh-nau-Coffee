@@ -13,10 +13,15 @@
     --font-sans: 'Poppins', 'Inter', system-ui, sans-serif;
   }
 
-  body {
+  html, body, #root {
     font-family: var(--font-sans);
     background-color: #FAF6F0;
     color: #1A1716;
+    overflow-x: hidden;
+    max-width: 100vw;
+    width: 100%;
+    margin: 0;
+    padding: 0;
   }
 
   h1, h2, h3, .font-serif {
@@ -120,25 +125,5 @@
   animation: floatBean 4s ease-in-out infinite;
 }
 
-/* Custom Scrollbar */
-::-webkit-scrollbar {
-  width: 9px;
-}
 
-::-webkit-scrollbar-track {
-  background: #FAF6F0;
-}
-
-.dark ::-webkit-scrollbar-track {
-  background: #1B1716;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #4B2E2B;
-  border-radius: 9999px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #351F1D;
-}
 

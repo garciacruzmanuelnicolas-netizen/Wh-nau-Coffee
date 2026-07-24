@@ -32,7 +32,7 @@ export const About: React.FC = () => {
   ];
 
   return (
-    <section id="nosotros" className="py-24 bg-[#FAF6F0] dark:bg-[#1A1716] text-[#1A1716] dark:text-[#FAF6F0] relative overflow-hidden">
+    <section id="nosotros" className="scroll-mt-24 py-24 bg-[#FAF6F0] dark:bg-[#1A1716] text-[#1A1716] dark:text-[#FAF6F0] relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}

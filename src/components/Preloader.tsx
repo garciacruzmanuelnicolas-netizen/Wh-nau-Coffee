@@ -17,8 +17,8 @@ export const Preloader: React.FC = () => {
       {loading && (
         <motion.div
           initial={{ opacity: 1 }}
-          exit={{ opacity: 0, transition: { duration: 0.6, ease: 'easeInOut' } }}
-          className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#2D1A18] text-[#FAF6F0]"
+          exit={{ opacity: 0, transition: { duration: 0.4, ease: 'easeInOut' } }}
+          className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#2D1A18] text-[#FAF6F0] pointer-events-auto"
         >
           <div className="relative flex flex-col items-center">
             {/* Steam particles */}

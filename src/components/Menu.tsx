@@ -32,7 +32,7 @@ export const Menu: React.FC<MenuProps> = ({ onSelectItemForReservation }) => {
   });
 
   return (
-    <section id="menu" className="py-24 bg-[#F2EBE1] dark:bg-[#231F1E] text-[#1A1716] dark:text-[#FAF6F0] relative">
+    <section id="menu" className="scroll-mt-24 py-24 bg-[#F2EBE1] dark:bg-[#231F1E] text-[#1A1716] dark:text-[#FAF6F0] relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}

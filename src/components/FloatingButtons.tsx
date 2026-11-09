@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Phone, ArrowUp, MessageSquare } from 'lucide-react';
 import { STORE_INFO } from '../data/cafeData';
+import { buildWhatsAppUrl } from '../utils/whatsapp';
 
 export const FloatingButtons: React.FC = () => {
   const [showScrollTop, setShowScrollTop] = useState(false);
@@ -18,9 +19,9 @@ export const FloatingButtons: React.FC = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const whatsappUrl = `https://wa.me/${STORE_INFO.whatsappNumber}?text=${encodeURIComponent(
+  const whatsappUrl = buildWhatsAppUrl(
     'Hola Whānau Coffee! Quisiera hacer una consulta sobre la carta o reserva de mesa.'
-  )}`;
+  );
 
   return (
     <div className="fixed bottom-6 right-6 z-40 flex flex-col items-end space-y-3 pointer-events-none">

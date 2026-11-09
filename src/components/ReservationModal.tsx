@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { X, Calendar, Clock, Users, CheckCircle2, Coffee } from 'lucide-react';
 import { MenuItem } from '../types';
+import { buildWhatsAppUrl, todayLocalISO } from '../utils/whatsapp';
 
 interface ReservationModalProps {
   isOpen: boolean;
@@ -18,7 +19,7 @@ export const ReservationModal: React.FC<ReservationModalProps> = ({
     name: '',
     email: '',
     phone: '',
-    date: new Date().toISOString().split('T')[0],
+    date: todayLocalISO(),
     time: '10:00',
     guests: 2,
     notes: '',
@@ -38,12 +39,19 @@ export const ReservationModal: React.FC<ReservationModalProps> = ({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
-
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setIsConfirmed(true);
-    }, 1200);
+    const [y, m, d] = formData.date.split('-');
+    const lines = [
+      'Hola Whānau Coffee! Quisiera reservar mesa:',
+      `• Nombre: ${formData.name}`,
+      `• Fecha: ${d}/${m}/${y} a las ${formData.time}`,
+      `• Comensales: ${formData.guests}`,
+      formData.phone && `• Teléfono: ${formData.phone}`,
+      formData.email && `• Email: ${formData.email}`,
+      formData.notes && `• Notas: ${formData.notes}`,
+    ].filter(Boolean);
+    // Se abre de forma síncrona para que el navegador no bloquee la ventana
+    window.open(buildWhatsAppUrl(lines.join('\n')), '_blank', 'noopener,noreferrer');
+    setIsConfirmed(true);
   };
 
   const resetAndClose = () => {
@@ -96,7 +104,7 @@ export const ReservationModal: React.FC<ReservationModalProps> = ({
                   <CheckCircle2 className="w-10 h-10" />
                 </div>
                 <h4 className="font-serif font-bold text-2xl text-[#4B2E2B] dark:text-amber-200">
-                  ¡Reserva Confirmada!
+                  ¡Solicitud lista!
                 </h4>
                 <div className="bg-amber-50 dark:bg-[#2D2725] p-4 rounded-2xl text-xs space-y-1 text-left border border-amber-200/50">
                   <p><strong>Nombre:</strong> {formData.name}</p>
@@ -105,7 +113,7 @@ export const ReservationModal: React.FC<ReservationModalProps> = ({
                   {selectedItem && <p><strong>Producto de interés:</strong> {selectedItem.name}</p>}
                 </div>
                 <p className="text-xs text-gray-500">
-                  Te hemos enviado un recordatorio al correo electrónico. ¡Te esperamos en Garrucha!
+                  Hemos abierto WhatsApp con tu reserva. Pulsa enviar allí y te confirmaremos la mesa lo antes posible. Si no se abrió, llámanos o escríbenos al 649 18 91 74.
                 </p>
                 <button
                   onClick={resetAndClose}
@@ -134,6 +142,7 @@ export const ReservationModal: React.FC<ReservationModalProps> = ({
                       type="date"
                       value={formData.date}
                       onChange={(e) => setFormData({ ...formData, date: e.target.value })}
+                      min={todayLocalISO()}
                       required
                       className="w-full px-3 py-2.5 rounded-xl bg-gray-50 dark:bg-[#2D2725] border border-gray-200 dark:border-gray-700 text-xs focus:ring-2 focus:ring-[#4B2E2B]"
                     />
@@ -240,7 +249,7 @@ export const ReservationModal: React.FC<ReservationModalProps> = ({
                   disabled={isSubmitting}
                   className="w-full py-3.5 rounded-xl bg-[#4B2E2B] text-white font-medium text-sm hover:bg-[#351F1D] transition-colors shadow-lg mt-2"
                 >
-                  {isSubmitting ? 'Confirmando...' : 'Confirmar Reserva de Mesa'}
+                  {isSubmitting ? 'Abriendo WhatsApp...' : 'Reservar por WhatsApp'}
                 </button>
               </form>
             )}

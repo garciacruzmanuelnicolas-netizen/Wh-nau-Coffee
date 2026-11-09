@@ -8,21 +8,29 @@ export interface OpeningStatus {
 }
 
 export function getCurrentOpeningStatus(): OpeningStatus {
-  const now = new Date();
-  const dayIndex = now.getDay(); // 0 = Sun, 1 = Mon, ..., 6 = Sat
+  // Siempre con la hora de España (Garrucha), no la del dispositivo del visitante
+  const parts = new Intl.DateTimeFormat('en-GB', {
+    timeZone: 'Europe/Madrid',
+    weekday: 'short',
+    hour: '2-digit',
+    minute: '2-digit',
+    hourCycle: 'h23',
+  }).formatToParts(new Date());
+  const get = (t: string) => parts.find((p) => p.type === t)?.value ?? '';
+  const dayIndex = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].indexOf(get('weekday')); // 0 = Sun
   
   // Map JS day index to schedule array index (Mon = 0, Sun = 6)
   const scheduleMapIndex = dayIndex === 0 ? 6 : dayIndex - 1;
   const todaySchedule = WEEKLY_SCHEDULE[scheduleMapIndex];
 
-  const currentHours = now.getHours() + now.getMinutes() / 60;
+  const currentHours = Number(get('hour')) + Number(get('minute')) / 60;
 
   const isOpen = currentHours >= todaySchedule.openTime && currentHours < todaySchedule.closeTime;
 
   if (isOpen) {
     const closeHoursInt = Math.floor(todaySchedule.closeTime);
     const closeMinutesInt = Math.round((todaySchedule.closeTime - closeHoursInt) * 60);
-    const formattedClose = `${closeHoursInt}:${closeMinutesInt === 0 ? '00' : closeMinutesInt}`;
+    const formattedClose = `${closeHoursInt}:${String(closeMinutesInt).padStart(2, '0')}`;
 
     return {
       isOpen: true,
@@ -47,7 +55,7 @@ export function getCurrentOpeningStatus(): OpeningStatus {
 
     const openHoursInt = Math.floor(nextDaySchedule.openTime);
     const openMinutesInt = Math.round((nextDaySchedule.openTime - openHoursInt) * 60);
-    const formattedOpen = `${openHoursInt}:${openMinutesInt === 0 ? '00' : '30'}`;
+    const formattedOpen = `${openHoursInt}:${String(openMinutesInt).padStart(2, '0')}`;
 
     return {
       isOpen: false,

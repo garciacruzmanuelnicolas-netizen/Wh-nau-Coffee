@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'motion/react';
 import { Coffee, Utensils, Heart, Home, Award } from 'lucide-react';
 import { STORE_INFO } from '../data/cafeData';
+import { responsiveImage } from '../utils/images';
 
 export const About: React.FC = () => {
   const features = [
@@ -59,8 +60,12 @@ export const About: React.FC = () => {
           >
             <div className="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white dark:border-gray-800">
               <img
-                src={STORE_INFO.interiorImage}
+                {...responsiveImage(STORE_INFO.interiorImage, '(min-width: 1024px) 50vw, 100vw')}
                 alt="Interior Whānau Coffee Garrucha"
+                loading="lazy"
+                decoding="async"
+                width={1376}
+                height={768}
                 className="w-full h-[400px] sm:h-[500px] object-cover hover:scale-105 transition-transform duration-700"
                 referrerPolicy="no-referrer"
               />

@@ -96,10 +96,10 @@ export const ContactForm: React.FC = () => {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   {/* Nombre */}
                   <div>
-                    <label className="block text-xs uppercase font-semibold text-gray-600 dark:text-gray-300 mb-2">
+                    <label htmlFor="contact-field-1" className="block text-xs uppercase font-semibold text-gray-600 dark:text-gray-300 mb-2">
                       Nombre completo *
                     </label>
-                    <input
+                    <input id="contact-field-1"
                       type="text"
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
@@ -117,10 +117,10 @@ export const ContactForm: React.FC = () => {
 
                   {/* Correo */}
                   <div>
-                    <label className="block text-xs uppercase font-semibold text-gray-600 dark:text-gray-300 mb-2">
+                    <label htmlFor="contact-field-2" className="block text-xs uppercase font-semibold text-gray-600 dark:text-gray-300 mb-2">
                       Correo electrónico *
                     </label>
-                    <input
+                    <input id="contact-field-2"
                       type="email"
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
@@ -140,10 +140,10 @@ export const ContactForm: React.FC = () => {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   {/* Teléfono */}
                   <div>
-                    <label className="block text-xs uppercase font-semibold text-gray-600 dark:text-gray-300 mb-2">
+                    <label htmlFor="contact-field-3" className="block text-xs uppercase font-semibold text-gray-600 dark:text-gray-300 mb-2">
                       Teléfono (Opcional)
                     </label>
-                    <input
+                    <input id="contact-field-3"
                       type="tel"
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
@@ -154,10 +154,10 @@ export const ContactForm: React.FC = () => {
 
                   {/* Asunto */}
                   <div>
-                    <label className="block text-xs uppercase font-semibold text-gray-600 dark:text-gray-300 mb-2">
+                    <label htmlFor="contact-field-4" className="block text-xs uppercase font-semibold text-gray-600 dark:text-gray-300 mb-2">
                       Asunto de la consulta
                     </label>
-                    <select
+                    <select id="contact-field-4"
                       value={formData.subject}
                       onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
                       className="w-full px-4 py-3.5 rounded-2xl bg-gray-50 dark:bg-[#2D2725] border border-gray-200 dark:border-gray-700 text-sm focus:outline-none focus:ring-2 focus:ring-[#4B2E2B] dark:focus:ring-amber-400"
@@ -172,10 +172,10 @@ export const ContactForm: React.FC = () => {
 
                 {/* Mensaje */}
                 <div>
-                  <label className="block text-xs uppercase font-semibold text-gray-600 dark:text-gray-300 mb-2">
+                  <label htmlFor="contact-field-5" className="block text-xs uppercase font-semibold text-gray-600 dark:text-gray-300 mb-2">
                     Mensaje *
                   </label>
-                  <textarea
+                  <textarea id="contact-field-5"
                     rows={4}
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}

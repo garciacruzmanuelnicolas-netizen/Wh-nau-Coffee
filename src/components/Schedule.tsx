@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { motion } from 'motion/react';
 import { Clock, CheckCircle2, XCircle } from 'lucide-react';
 import { WEEKLY_SCHEDULE } from '../data/cafeData';
-import { getCurrentOpeningStatus } from '../utils/timeUtils';
+import { getCurrentOpeningStatus, getMadridDayIndex } from '../utils/timeUtils';
 
 export const Schedule: React.FC = () => {
   const [status, setStatus] = useState(getCurrentOpeningStatus());
-  const todayIndex = new Date().getDay(); // 0 = Sun, 1 = Mon, ...
+  const todayIndex = getMadridDayIndex(); // 0 = Sun, 1 = Mon, ... (hora de España)
   const currentDayName = WEEKLY_SCHEDULE[todayIndex === 0 ? 6 : todayIndex - 1].day;
 
   useEffect(() => {

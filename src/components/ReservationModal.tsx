@@ -135,10 +135,10 @@ export const ReservationModal: React.FC<ReservationModalProps> = ({
 
                 <div className="grid grid-cols-2 gap-3">
                   <div>
-                    <label className="block text-[11px] uppercase font-bold text-gray-500 mb-1 flex items-center gap-1">
+                    <label htmlFor="res-field-1" className="block text-[11px] uppercase font-bold text-gray-500 mb-1 flex items-center gap-1">
                       <Calendar className="w-3.5 h-3.5" /> Fecha
                     </label>
-                    <input
+                    <input id="res-field-1"
                       type="date"
                       value={formData.date}
                       onChange={(e) => setFormData({ ...formData, date: e.target.value })}
@@ -149,10 +149,10 @@ export const ReservationModal: React.FC<ReservationModalProps> = ({
                   </div>
 
                   <div>
-                    <label className="block text-[11px] uppercase font-bold text-gray-500 mb-1 flex items-center gap-1">
+                    <label htmlFor="res-field-2" className="block text-[11px] uppercase font-bold text-gray-500 mb-1 flex items-center gap-1">
                       <Clock className="w-3.5 h-3.5" /> Hora
                     </label>
-                    <select
+                    <select id="res-field-2"
                       value={formData.time}
                       onChange={(e) => setFormData({ ...formData, time: e.target.value })}
                       className="w-full px-3 py-2.5 rounded-xl bg-gray-50 dark:bg-[#2D2725] border border-gray-200 dark:border-gray-700 text-xs focus:ring-2 focus:ring-[#4B2E2B]"
@@ -171,10 +171,10 @@ export const ReservationModal: React.FC<ReservationModalProps> = ({
                 </div>
 
                 <div>
-                  <label className="block text-[11px] uppercase font-bold text-gray-500 mb-1 flex items-center gap-1">
+                  <label htmlFor="res-field-3" className="block text-[11px] uppercase font-bold text-gray-500 mb-1 flex items-center gap-1">
                     <Users className="w-3.5 h-3.5" /> Personas
                   </label>
-                  <select
+                  <select id="res-field-3"
                     value={formData.guests}
                     onChange={(e) => setFormData({ ...formData, guests: parseInt(e.target.value) })}
                     className="w-full px-3 py-2.5 rounded-xl bg-gray-50 dark:bg-[#2D2725] border border-gray-200 dark:border-gray-700 text-xs focus:ring-2 focus:ring-[#4B2E2B]"
@@ -188,10 +188,10 @@ export const ReservationModal: React.FC<ReservationModalProps> = ({
                 </div>
 
                 <div>
-                  <label className="block text-[11px] uppercase font-bold text-gray-500 mb-1">
+                  <label htmlFor="res-field-4" className="block text-[11px] uppercase font-bold text-gray-500 mb-1">
                     Nombre completo *
                   </label>
-                  <input
+                  <input id="res-field-4"
                     type="text"
                     required
                     placeholder="Tu nombre y apellidos"
@@ -203,10 +203,10 @@ export const ReservationModal: React.FC<ReservationModalProps> = ({
 
                 <div className="grid grid-cols-2 gap-3">
                   <div>
-                    <label className="block text-[11px] uppercase font-bold text-gray-500 mb-1">
+                    <label htmlFor="res-field-5" className="block text-[11px] uppercase font-bold text-gray-500 mb-1">
                       Correo *
                     </label>
-                    <input
+                    <input id="res-field-5"
                       type="email"
                       required
                       placeholder="correo@ejemplo.com"
@@ -217,10 +217,10 @@ export const ReservationModal: React.FC<ReservationModalProps> = ({
                   </div>
 
                   <div>
-                    <label className="block text-[11px] uppercase font-bold text-gray-500 mb-1">
+                    <label htmlFor="res-field-6" className="block text-[11px] uppercase font-bold text-gray-500 mb-1">
                       Teléfono *
                     </label>
-                    <input
+                    <input id="res-field-6"
                       type="tel"
                       required
                       placeholder="600 00 00 00"
@@ -232,10 +232,10 @@ export const ReservationModal: React.FC<ReservationModalProps> = ({
                 </div>
 
                 <div>
-                  <label className="block text-[11px] uppercase font-bold text-gray-500 mb-1">
+                  <label htmlFor="res-field-7" className="block text-[11px] uppercase font-bold text-gray-500 mb-1">
                     Peticiones especiales / Alergias
                   </label>
-                  <textarea
+                  <textarea id="res-field-7"
                     rows={2}
                     placeholder="Mesa en terraza, trona de bebé, etc."
                     value={formData.notes}

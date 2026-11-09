@@ -64,9 +64,9 @@ export const Footer: React.FC = () => {
 
           {/* Enlaces Rápidos */}
           <div>
-            <h4 className="font-serif font-bold text-base text-amber-200 mb-4 uppercase tracking-wider text-xs">
+            <h3 className="font-serif font-bold text-base text-amber-200 mb-4 uppercase tracking-wider text-xs">
               Navegación Rápida
-            </h4>
+            </h3>
             <ul className="space-y-2 text-xs text-gray-300">
               <li><a href="#hero" onClick={(e) => handleLinkClick(e, '#hero')} className="hover:text-amber-300 transition-colors">Inicio</a></li>
               <li><a href="#nosotros" onClick={(e) => handleLinkClick(e, '#nosotros')} className="hover:text-amber-300 transition-colors">Sobre Nosotros</a></li>
@@ -78,9 +78,9 @@ export const Footer: React.FC = () => {
 
           {/* Horario Sintetizado */}
           <div>
-            <h4 className="font-serif font-bold text-base text-amber-200 mb-4 uppercase tracking-wider text-xs">
+            <h3 className="font-serif font-bold text-base text-amber-200 mb-4 uppercase tracking-wider text-xs">
               Horario Habitual
-            </h4>
+            </h3>
             <ul className="space-y-2 text-xs text-gray-300">
               <li>Lunes a Jueves: <span className="text-white font-medium">7:30 a 22:00</span></li>
               <li>Viernes: <span className="text-white font-medium">7:30 a 23:00</span></li>
@@ -91,9 +91,9 @@ export const Footer: React.FC = () => {
 
           {/* Datos de Contacto */}
           <div>
-            <h4 className="font-serif font-bold text-base text-amber-200 mb-4 uppercase tracking-wider text-xs">
+            <h3 className="font-serif font-bold text-base text-amber-200 mb-4 uppercase tracking-wider text-xs">
               Contacto & Dirección
-            </h4>
+            </h3>
             <ul className="space-y-3 text-xs text-gray-300">
               <li className="flex items-start space-x-2">
                 <MapPin className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
@@ -139,7 +139,7 @@ export const Footer: React.FC = () => {
 
         {/* Watermark / Signature */}
         <div className="mt-4 text-left">
-          <span className="text-[10px] text-gray-400/30 hover:text-gray-300/60 transition-opacity tracking-widest uppercase font-sans select-none">
+          <span className="text-[10px] text-gray-400 hover:text-gray-300 transition-opacity tracking-widest uppercase font-sans select-none">
             Creado por Nicolás
           </span>
         </div>

@@ -57,7 +57,7 @@ export const FloatingButtons: React.FC = () => {
         href={whatsappUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className="px-4 py-3 rounded-full bg-emerald-600 text-white shadow-2xl hover:bg-emerald-700 active:scale-95 transition-all pointer-events-auto border border-white/20 flex items-center space-x-2 group"
+        className="px-4 py-3 rounded-full bg-emerald-700 text-white shadow-2xl hover:bg-emerald-800 active:scale-95 transition-all pointer-events-auto border border-white/20 flex items-center space-x-2 group"
         title="Chat en WhatsApp"
       >
         <MessageSquare className="w-5 h-5 fill-white" />

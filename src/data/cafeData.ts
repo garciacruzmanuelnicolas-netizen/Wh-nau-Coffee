@@ -1,6 +1,7 @@
 import { MenuItem, SpecialtyItem, GalleryItem, ReviewItem, DaySchedule } from '../types';
-import heroCoffeeToast from '../assets/images/hero_coffee_toast_1784843497889.jpg';
-import cafeInteriorImg from '../assets/images/cafe_interior_1784843511004.jpg';
+// Imágenes optimizadas (WebP en 640/960/1376px) servidas desde /public/images
+const heroCoffeeToast = '/images/hero-1376.webp';
+const cafeInteriorImg = '/images/interior-1376.webp';
 
 export const STORE_INFO = {
   name: 'Whānau Coffee',

@@ -7,6 +7,12 @@ export interface OpeningStatus {
   nextDetail: string;
 }
 
+/** Día de la semana en España (0 = domingo ... 6 = sábado). */
+export function getMadridDayIndex(): number {
+  const wd = new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/Madrid', weekday: 'short' }).format(new Date());
+  return ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].indexOf(wd);
+}
+
 export function getCurrentOpeningStatus(): OpeningStatus {
   // Siempre con la hora de España (Garrucha), no la del dispositivo del visitante
   const parts = new Intl.DateTimeFormat('en-GB', {
@@ -35,7 +41,7 @@ export function getCurrentOpeningStatus(): OpeningStatus {
     return {
       isOpen: true,
       statusText: `Abierto ahora`,
-      badgeClass: 'bg-emerald-500/15 text-emerald-700 dark:text-emerald-400 border-emerald-500/30',
+      badgeClass: 'bg-emerald-500/15 text-emerald-800 dark:text-emerald-400 border-emerald-500/30',
       nextDetail: `Cierra a las ${formattedClose}`,
     };
   } else {
@@ -60,7 +66,7 @@ export function getCurrentOpeningStatus(): OpeningStatus {
     return {
       isOpen: false,
       statusText: `Cerrado ahora`,
-      badgeClass: 'bg-rose-500/15 text-rose-700 dark:text-rose-400 border-rose-500/30',
+      badgeClass: 'bg-rose-500/15 text-rose-800 dark:text-rose-400 border-rose-500/30',
       nextDetail: isTomorrow 
         ? `Abre mañana a las ${formattedOpen}` 
         : `Abre hoy a las ${formattedOpen}`,

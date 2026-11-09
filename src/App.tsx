@@ -1,35 +1,33 @@
-import React, { useState, useEffect } from 'react';
-import { Preloader } from './components/Preloader';
+import React, { useState, useEffect, lazy, Suspense } from 'react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
-import { About } from './components/About';
-import { Menu } from './components/Menu';
-import { Specialties } from './components/Specialties';
-import { Reviews } from './components/Reviews';
-import { Stats } from './components/Stats';
-import { Schedule } from './components/Schedule';
-import { Location } from './components/Location';
-import { ContactForm } from './components/ContactForm';
-import { ReservationModal } from './components/ReservationModal';
-import { FloatingButtons } from './components/FloatingButtons';
-import { Footer } from './components/Footer';
 import { MenuItem } from './types';
 
+// Lo que está debajo de la portada se descarga aparte para que el primer pintado sea rápido
+const About = lazy(() => import('./components/About').then((m) => ({ default: m.About })));
+const Menu = lazy(() => import('./components/Menu').then((m) => ({ default: m.Menu })));
+const Specialties = lazy(() => import('./components/Specialties').then((m) => ({ default: m.Specialties })));
+const Reviews = lazy(() => import('./components/Reviews').then((m) => ({ default: m.Reviews })));
+const Stats = lazy(() => import('./components/Stats').then((m) => ({ default: m.Stats })));
+const Schedule = lazy(() => import('./components/Schedule').then((m) => ({ default: m.Schedule })));
+const Location = lazy(() => import('./components/Location').then((m) => ({ default: m.Location })));
+const ContactForm = lazy(() => import('./components/ContactForm').then((m) => ({ default: m.ContactForm })));
+const ReservationModal = lazy(() => import('./components/ReservationModal').then((m) => ({ default: m.ReservationModal })));
+const FloatingButtons = lazy(() => import('./components/FloatingButtons').then((m) => ({ default: m.FloatingButtons })));
+const Footer = lazy(() => import('./components/Footer').then((m) => ({ default: m.Footer })));
+
 export default function App() {
-  const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
   const [reservationModalOpen, setReservationModalOpen] = useState<boolean>(false);
   const [selectedItemForReservation, setSelectedItemForReservation] = useState<MenuItem | null>(null);
 
+  // Modo oscuro automático según el ajuste del móvil/PC (la clase inicial la pone index.html)
   useEffect(() => {
-    // Sync Dark Mode class with root document
-    if (isDarkMode) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-  }, [isDarkMode]);
-
-  const toggleDarkMode = () => setIsDarkMode((prev) => !prev);
+    const mq = window.matchMedia('(prefers-color-scheme: dark)');
+    const apply = () => document.documentElement.classList.toggle('dark', mq.matches);
+    apply();
+    mq.addEventListener('change', apply);
+    return () => mq.removeEventListener('change', apply);
+  }, []);
 
   const handleOpenReservation = () => {
     setSelectedItemForReservation(null);
@@ -43,8 +41,6 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-[#FAF6F0] dark:bg-[#1A1716] text-[#1A1716] dark:text-[#FAF6F0] font-sans antialiased selection:bg-[#4B2E2B] selection:text-white relative bg-paper-texture overflow-x-hidden">
-      {/* 1. Preloader */}
-      <Preloader />
 
       {/* 2. Sticky Navbar */}
       <Navbar
@@ -56,6 +52,7 @@ export default function App() {
         {/* 4. Fullscreen Parallax Hero */}
         <Hero onOpenReservation={handleOpenReservation} />
 
+        <Suspense fallback={null}>
         {/* 5. About Us */}
         <About />
 
@@ -79,8 +76,10 @@ export default function App() {
 
         {/* 13. Contact Form */}
         <ContactForm />
+        </Suspense>
       </main>
 
+      <Suspense fallback={null}>
       {/* 14. Footer */}
       <Footer />
 
@@ -93,6 +92,7 @@ export default function App() {
 
       {/* 16. Floating WhatsApp, Call & ScrollToTop Buttons */}
       <FloatingButtons />
+      </Suspense>
     </div>
   );
 }

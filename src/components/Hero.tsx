@@ -1,21 +1,33 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { motion } from 'motion/react';
 import { Coffee, MapPin, ChevronDown, Sparkles } from 'lucide-react';
 import { STORE_INFO } from '../data/cafeData';
+import { responsiveImage } from '../utils/images';
 
 interface HeroProps {
   onOpenReservation: () => void;
 }
 
 export const Hero: React.FC<HeroProps> = ({ onOpenReservation }) => {
-  const [scrollY, setScrollY] = useState(0);
+  const bgRef = useRef<HTMLDivElement>(null);
 
+  // Parallax sin re-renderizar React en cada scroll
   useEffect(() => {
+    let frame = 0;
     const handleScroll = () => {
-      setScrollY(window.scrollY);
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(() => {
+        const y = window.scrollY;
+        if (bgRef.current && y < window.innerHeight * 1.5) {
+          bgRef.current.style.transform = `translate3d(0, ${y * 0.3}px, 0) scale(1.05)`;
+        }
+      });
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
   const handleScrollTo = (id: string) => {
@@ -31,23 +43,20 @@ export const Hero: React.FC<HeroProps> = ({ onOpenReservation }) => {
       className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#1A1716]"
     >
       {/* Background Image with subtle Parallax */}
-      <div
-        className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat transition-transform duration-100 ease-out scale-105"
-        style={{
-          backgroundImage: `url(${STORE_INFO.heroImage})`,
-          transform: `translateY(${scrollY * 0.3}px) scale(1.05)`,
-        }}
-      >
+      <div ref={bgRef} className="absolute inset-0 z-0 scale-105 will-change-transform">
         <img
-          src={STORE_INFO.heroImage}
+          {...responsiveImage(STORE_INFO.heroImage, '100vw')}
           alt="Café de especialidad Whānau Coffee"
-          className="hidden"
-          referrerPolicy="no-referrer"
+          className="w-full h-full object-cover"
+          width={1376}
+          height={768}
+          fetchPriority="high"
+          decoding="async"
         />
       </div>
 
       {/* Dark Overlay gradient */}
-      <div className="absolute inset-0 z-10 bg-gradient-to-t from-[#1A1716] via-black/60 to-black/70 backdrop-brightness-90" />
+      <div className="absolute inset-0 z-10 bg-gradient-to-t from-[#1A1716] via-black/60 to-black/70" />
 
       {/* Floating Coffee Beans Deco */}
       <div className="absolute inset-0 z-10 pointer-events-none overflow-hidden opacity-30">
@@ -80,24 +89,18 @@ export const Hero: React.FC<HeroProps> = ({ onOpenReservation }) => {
         </motion.div>
 
         {/* Main Title */}
-        <motion.h1
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
+        <h1
           className="font-serif text-5xl sm:text-7xl md:text-8xl font-bold tracking-tight text-white mb-6 leading-none drop-shadow-lg"
         >
           Whānau Coffee
-        </motion.h1>
+        </h1>
 
         {/* Subtitle */}
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
+        <p
           className="text-lg sm:text-2xl font-light text-amber-100/90 max-w-3xl mb-10 leading-relaxed drop-shadow-md font-serif italic"
         >
           "Café de especialidad, desayunos irresistibles y el mejor ambiente de Garrucha."
-        </motion.p>
+        </p>
 
         {/* Action Buttons */}
         <motion.div

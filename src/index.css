@@ -13,7 +13,7 @@
     --color-olive-secondary: #556B2F;
     --color-olive-light: #8A9A65;
     --font-serif: 'Playfair Display', Georgia, serif;
-    --font-sans: 'Poppins', 'Inter', system-ui, sans-serif;
+    --font-sans: 'Poppins', system-ui, sans-serif;
   }
 
   html, body, #root {
@@ -27,6 +27,11 @@
     padding: 0;
   }
 
+  html.dark, html.dark body, html.dark #root {
+    background-color: #1A1716;
+    color: #FAF6F0;
+  }
+
   h1, h2, h3, .font-serif {
     font-family: var(--font-serif);
   }
@@ -38,7 +43,7 @@
 }
 
 .font-sans {
-  font-family: 'Poppins', 'Inter', sans-serif;
+  font-family: 'Poppins', system-ui, sans-serif;
 }
 
 /* Subtle Recycled Paper Texture background option */

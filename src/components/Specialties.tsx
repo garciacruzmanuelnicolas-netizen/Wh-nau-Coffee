@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'motion/react';
 import { Coffee, Utensils, Flame, Sparkles, ArrowRight } from 'lucide-react';
 import { SPECIALTIES } from '../data/cafeData';
+import { responsiveImage } from '../utils/images';
 
 interface SpecialtiesProps {
   onOpenReservation: () => void;
@@ -47,8 +48,12 @@ export const Specialties: React.FC<SpecialtiesProps> = ({ onOpenReservation }) =
                 {/* Massive Image Container */}
                 <div className="relative w-full sm:w-1/2 h-64 sm:h-auto overflow-hidden shrink-0">
                   <img
-                    src={spec.image}
+                    {...responsiveImage(spec.image, '(min-width: 1024px) 40vw, (min-width: 640px) 50vw, 100vw')}
                     alt={spec.title}
+                    loading="lazy"
+                    decoding="async"
+                    width={800}
+                    height={533}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                     referrerPolicy="no-referrer"
                   />

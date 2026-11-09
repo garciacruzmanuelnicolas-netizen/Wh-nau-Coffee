@@ -1,20 +1,29 @@
-import React, { useState, useEffect, lazy, Suspense } from 'react';
+import React, { useState, useEffect, useCallback, useMemo, lazy, Suspense } from 'react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
+import { FloatingButtons } from './components/FloatingButtons';
+import { lazyWhenVisible } from './utils/lazyHydrate';
 import { MenuItem } from './types';
 
-// Lo que está debajo de la portada se descarga aparte para que el primer pintado sea rápido
-const About = lazy(() => import('./components/About').then((m) => ({ default: m.About })));
-const Menu = lazy(() => import('./components/Menu').then((m) => ({ default: m.Menu })));
-const Specialties = lazy(() => import('./components/Specialties').then((m) => ({ default: m.Specialties })));
-const Reviews = lazy(() => import('./components/Reviews').then((m) => ({ default: m.Reviews })));
-const Stats = lazy(() => import('./components/Stats').then((m) => ({ default: m.Stats })));
-const Schedule = lazy(() => import('./components/Schedule').then((m) => ({ default: m.Schedule })));
-const Location = lazy(() => import('./components/Location').then((m) => ({ default: m.Location })));
-const ContactForm = lazy(() => import('./components/ContactForm').then((m) => ({ default: m.ContactForm })));
-const ReservationModal = lazy(() => import('./components/ReservationModal').then((m) => ({ default: m.ReservationModal })));
-const FloatingButtons = lazy(() => import('./components/FloatingButtons').then((m) => ({ default: m.FloatingButtons })));
-const Footer = lazy(() => import('./components/Footer').then((m) => ({ default: m.Footer })));
+// Secciones bajo la portada: su JavaScript se descarga e hidrata solo cuando el
+// usuario se acerca a ellas (el HTML ya viene prerenderizado y se ve desde el principio).
+const About = lazyWhenVisible('nosotros', () => import('./components/About').then((m) => ({ default: m.About })));
+const Menu = lazyWhenVisible('menu', () => import('./components/Menu').then((m) => ({ default: m.Menu })));
+const Specialties = lazyWhenVisible('especialidades', () =>
+  import('./components/Specialties').then((m) => ({ default: m.Specialties })),
+);
+const Reviews = lazyWhenVisible('opiniones', () => import('./components/Reviews').then((m) => ({ default: m.Reviews })));
+const Stats = lazyWhenVisible('cifras', () => import('./components/Stats').then((m) => ({ default: m.Stats })));
+const Schedule = lazyWhenVisible('horario', () => import('./components/Schedule').then((m) => ({ default: m.Schedule })));
+const Location = lazyWhenVisible('ubicacion', () => import('./components/Location').then((m) => ({ default: m.Location })));
+const ContactForm = lazyWhenVisible('contacto', () =>
+  import('./components/ContactForm').then((m) => ({ default: m.ContactForm })),
+);
+const Footer = lazyWhenVisible('pie', () => import('./components/Footer').then((m) => ({ default: m.Footer })));
+// El modal de reserva solo se descarga cuando alguien lo abre
+const ReservationModal = lazy(() =>
+  import('./components/ReservationModal').then((m) => ({ default: m.ReservationModal })),
+);
 
 export default function App() {
   const [reservationModalOpen, setReservationModalOpen] = useState<boolean>(false);
@@ -29,15 +38,65 @@ export default function App() {
     return () => mq.removeEventListener('change', apply);
   }, []);
 
-  const handleOpenReservation = () => {
+  // Callbacks estables + secciones memorizadas: abrir la reserva no vuelve a
+  // renderizar las secciones que aún no se han hidratado (si no, React tendría
+  // que tirar su HTML prerenderizado).
+  const handleOpenReservation = useCallback(() => {
     setSelectedItemForReservation(null);
     setReservationModalOpen(true);
-  };
+  }, []);
 
-  const handleSelectItemForReservation = (item: MenuItem) => {
+  const handleSelectItemForReservation = useCallback((item: MenuItem) => {
     setSelectedItemForReservation(item);
     setReservationModalOpen(true);
-  };
+  }, []);
+
+  const handleCloseReservation = useCallback(() => setReservationModalOpen(false), []);
+
+  const sections = useMemo(
+    () => (
+      <>
+        <div data-hydrate="nosotros">
+          <Suspense fallback={null}><About /></Suspense>
+        </div>
+        <div data-hydrate="menu">
+          <Suspense fallback={null}>
+            <Menu onSelectItemForReservation={handleSelectItemForReservation} />
+          </Suspense>
+        </div>
+        <div data-hydrate="especialidades">
+          <Suspense fallback={null}>
+            <Specialties onOpenReservation={handleOpenReservation} />
+          </Suspense>
+        </div>
+        <div data-hydrate="opiniones">
+          <Suspense fallback={null}><Reviews /></Suspense>
+        </div>
+        <div data-hydrate="cifras">
+          <Suspense fallback={null}><Stats /></Suspense>
+        </div>
+        <div data-hydrate="horario">
+          <Suspense fallback={null}><Schedule /></Suspense>
+        </div>
+        <div data-hydrate="ubicacion">
+          <Suspense fallback={null}><Location /></Suspense>
+        </div>
+        <div data-hydrate="contacto">
+          <Suspense fallback={null}><ContactForm /></Suspense>
+        </div>
+      </>
+    ),
+    [handleOpenReservation, handleSelectItemForReservation],
+  );
+
+  const footer = useMemo(
+    () => (
+      <div data-hydrate="pie">
+        <Suspense fallback={null}><Footer /></Suspense>
+      </div>
+    ),
+    [],
+  );
 
   return (
     <div className="min-h-screen bg-[#FAF6F0] dark:bg-[#1A1716] text-[#1A1716] dark:text-[#FAF6F0] font-sans antialiased selection:bg-[#4B2E2B] selection:text-white relative bg-paper-texture overflow-x-hidden">
@@ -52,47 +111,25 @@ export default function App() {
         {/* 4. Fullscreen Parallax Hero */}
         <Hero onOpenReservation={handleOpenReservation} />
 
-        <Suspense fallback={null}>
-        {/* 5. About Us */}
-        <About />
-
-        {/* 6. Interactive Menu */}
-        <Menu onSelectItemForReservation={handleSelectItemForReservation} />
-
-        {/* 7. Specialties Section (Warm Beige) */}
-        <Specialties onOpenReservation={handleOpenReservation} />
-
-        {/* 8. Real Google Reviews Carousel */}
-        <Reviews />
-
-        {/* 10. Animated Statistics */}
-        <Stats />
-
-        {/* 11. Opening Hours Schedule */}
-        <Schedule />
-
-        {/* 12. Location & Google Map */}
-        <Location />
-
-        {/* 13. Contact Form */}
-        <ContactForm />
-        </Suspense>
+        {/* 5-13. Secciones bajo la portada */}
+        {sections}
       </main>
 
-      <Suspense fallback={null}>
-      {/* 14. Footer */}
-      <Footer />
+      {footer}
 
-      {/* 15. Table Reservation Modal */}
-      <ReservationModal
-        isOpen={reservationModalOpen}
-        onClose={() => setReservationModalOpen(false)}
-        selectedItem={selectedItemForReservation}
-      />
+      {/* Modal de reserva: solo existe (y se descarga) cuando se abre */}
+      {reservationModalOpen && (
+        <Suspense fallback={null}>
+          <ReservationModal
+            isOpen
+            onClose={handleCloseReservation}
+            selectedItem={selectedItemForReservation}
+          />
+        </Suspense>
+      )}
 
-      {/* 16. Floating WhatsApp, Call & ScrollToTop Buttons */}
+      {/* Botones flotantes de WhatsApp, llamada y volver arriba */}
       <FloatingButtons />
-      </Suspense>
     </div>
   );
 }

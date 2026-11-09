@@ -1,4 +1,4 @@
-import { STORE_INFO } from '../data/cafeData';
+import { STORE_INFO } from '../data/store';
 
 export function buildWhatsAppUrl(message: string): string {
   return `https://wa.me/${STORE_INFO.whatsappNumber}?text=${encodeURIComponent(message)}`;

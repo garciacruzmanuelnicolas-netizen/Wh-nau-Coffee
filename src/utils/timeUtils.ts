@@ -1,4 +1,5 @@
-import { WEEKLY_SCHEDULE } from '../data/cafeData';
+import { useEffect, useState } from 'react';
+import { WEEKLY_SCHEDULE } from '../data/store';
 
 export interface OpeningStatus {
   isOpen: boolean;
@@ -72,4 +73,25 @@ export function getCurrentOpeningStatus(): OpeningStatus {
         : `Abre hoy a las ${formattedOpen}`,
     };
   }
+}
+
+/**
+ * Estado de apertura en vivo. Devuelve null en el HTML prerenderizado y en el
+ * primer render del navegador (así coinciden y no hay errores de hidratación);
+ * justo después se calcula con la hora real de España y se refresca cada minuto.
+ */
+export function useOpeningStatus(): { status: OpeningStatus | null; todayIndex: number | null } {
+  const [state, setState] = useState<{ status: OpeningStatus | null; todayIndex: number | null }>({
+    status: null,
+    todayIndex: null,
+  });
+
+  useEffect(() => {
+    const update = () => setState({ status: getCurrentOpeningStatus(), todayIndex: getMadridDayIndex() });
+    update();
+    const timer = setInterval(update, 60000);
+    return () => clearInterval(timer);
+  }, []);
+
+  return state;
 }

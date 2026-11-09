@@ -1,13 +1,18 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Coffee, MapPin, Phone, Mail, Instagram, Facebook, Heart, Shield, FileText } from 'lucide-react';
-import { STORE_INFO } from '../data/cafeData';
+import { STORE_INFO } from '../data/store';
 import { motion, AnimatePresence } from 'motion/react';
+import { renderAllSections } from '../utils/sections';
 
 export const Footer: React.FC = () => {
   const [legalModal, setLegalModal] = useState<'privacy' | 'terms' | null>(null);
+  // Año del build en el HTML prerenderizado; el navegador lo actualiza si ha cambiado
+  const [year, setYear] = useState<number>(__BUILD_YEAR__);
+  useEffect(() => setYear(new Date().getFullYear()), []);
 
   const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
+    renderAllSections();
     const elem = document.querySelector(href);
     if (elem) {
       elem.scrollIntoView({ behavior: 'smooth' });
@@ -115,21 +120,21 @@ export const Footer: React.FC = () => {
         {/* Bottom Bar */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-gray-400 gap-4">
           <p className="flex items-center space-x-1 flex-wrap justify-center sm:justify-start">
-            <span>© {new Date().getFullYear()} Whānau Coffee. Todos los derechos reservados. Hecho con</span>
+            <span>© {year} Whānau Coffee. Todos los derechos reservados. Hecho con</span>
             <Heart className="w-3.5 h-3.5 text-rose-500 fill-rose-500 mx-1 inline" />
             <span>en Garrucha.</span>
           </p>
 
           <div className="flex items-center space-x-4">
             <button
-              onClick={() => setLegalModal('privacy')}
+              onClick={() => { renderAllSections(); setLegalModal('privacy'); }}
               className="hover:text-amber-300 transition-colors underline"
             >
               Política de Privacidad
             </button>
             <span>•</span>
             <button
-              onClick={() => setLegalModal('terms')}
+              onClick={() => { renderAllSections(); setLegalModal('terms'); }}
               className="hover:text-amber-300 transition-colors underline"
             >
               Aviso Legal & Cookies

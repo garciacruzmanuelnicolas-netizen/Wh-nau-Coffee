@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
 import { Coffee, Menu as MenuIcon, X, CalendarCheck } from 'lucide-react';
-import { getCurrentOpeningStatus } from '../utils/timeUtils';
+import { useOpeningStatus } from '../utils/timeUtils';
+import { renderAllSections } from '../utils/sections';
 
 interface NavbarProps {
   onOpenReservation: () => void;
@@ -12,22 +12,16 @@ export const Navbar: React.FC<NavbarProps> = ({
 }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [status, setStatus] = useState(getCurrentOpeningStatus());
+  const { status } = useOpeningStatus();
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 40);
     };
 
-    window.addEventListener('scroll', handleScroll);
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setStatus(getCurrentOpeningStatus());
-    }, 60000);
-    return () => clearInterval(interval);
   }, []);
 
   const navLinks = [
@@ -47,6 +41,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
     // Allow the mobile menu drawer to start closing before calculating scroll position
     setTimeout(() => {
+      renderAllSections();
       const element = document.querySelector(href);
       if (element) {
         const headerOffset = 76;
@@ -64,7 +59,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
+        className={`critical-fonts fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
           isScrolled
             ? 'bg-white/90 dark:bg-[#1A1716]/90 backdrop-blur-md shadow-md py-3 text-[#1A1716] dark:text-[#FAF6F0]'
             : 'bg-gradient-to-b from-black/70 via-black/30 to-transparent py-5 text-white'
@@ -112,10 +107,13 @@ export const Navbar: React.FC<NavbarProps> = ({
           <div className="hidden lg:flex items-center space-x-3">
             {/* Open / Closed Status Badge */}
             <span
-              className={`text-xs px-2.5 py-1 rounded-full border font-medium flex items-center space-x-1.5 ${status.badgeClass}`}
+              className={`text-xs px-2.5 py-1 rounded-full border font-medium flex items-center space-x-1.5 ${
+                status ? status.badgeClass : 'invisible border-transparent'
+              }`}
+              aria-hidden={status ? undefined : true}
             >
-              <span className={`w-2 h-2 rounded-full ${status.isOpen ? 'bg-emerald-500 animate-pulse' : 'bg-rose-500'}`} />
-              <span>{status.isOpen ? 'Abierto' : 'Cerrado'}</span>
+              <span className={`w-2 h-2 rounded-full ${status?.isOpen ? 'bg-emerald-500 animate-pulse' : 'bg-rose-500'}`} />
+              <span>{status?.isOpen ? 'Abierto' : 'Cerrado'}</span>
             </span>
 
             {/* Primary CTA - Reserve Table */}
@@ -133,7 +131,8 @@ export const Navbar: React.FC<NavbarProps> = ({
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="p-2 rounded-xl bg-[#4B2E2B] text-white focus:outline-none"
-              aria-label="Abrir menú"
+              aria-label={mobileMenuOpen ? 'Cerrar menú' : 'Abrir menú'}
+              aria-expanded={mobileMenuOpen}
             >
               {mobileMenuOpen ? <X className="w-6 h-6" /> : <MenuIcon className="w-6 h-6" />}
             </button>
@@ -142,31 +141,25 @@ export const Navbar: React.FC<NavbarProps> = ({
       </header>
 
       {/* Mobile Drawer Menu */}
-      <AnimatePresence>
-        {mobileMenuOpen && (
+      {mobileMenuOpen && (
           <>
             {/* Backdrop overlay */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
+            <div
               onClick={() => setMobileMenuOpen(false)}
-              className="fixed inset-0 z-20 bg-black/60 backdrop-blur-xs lg:hidden"
+              className="fixed inset-0 z-20 bg-black/60 backdrop-blur-xs lg:hidden animate-fade-in"
             />
 
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.25, ease: 'easeInOut' }}
-              className="fixed top-[68px] left-0 right-0 z-30 bg-[#FAF6F0] dark:bg-[#1A1716] border-b border-gray-200 dark:border-gray-800 shadow-2xl overflow-hidden lg:hidden"
+            <div
+              className="fixed top-[68px] left-0 right-0 z-30 bg-[#FAF6F0] dark:bg-[#1A1716] border-b border-gray-200 dark:border-gray-800 shadow-2xl overflow-hidden lg:hidden animate-drawer-in"
             >
               <div className="px-5 py-6 space-y-4">
                 <div className="flex items-center justify-between pb-3 border-b border-gray-200 dark:border-gray-800">
-                  <span className={`text-xs px-3 py-1 rounded-full border font-medium flex items-center space-x-1.5 ${status.badgeClass}`}>
-                    <span className={`w-2 h-2 rounded-full ${status.isOpen ? 'bg-emerald-500 animate-pulse' : 'bg-rose-500'}`} />
-                    <span>{status.statusText} • {status.nextDetail}</span>
-                  </span>
+                  {status && (
+                    <span className={`text-xs px-3 py-1 rounded-full border font-medium flex items-center space-x-1.5 ${status.badgeClass}`}>
+                      <span className={`w-2 h-2 rounded-full ${status.isOpen ? 'bg-emerald-500 animate-pulse' : 'bg-rose-500'}`} />
+                      <span>{status.statusText} • {status.nextDetail}</span>
+                    </span>
+                  )}
                 </div>
 
                 <div className="grid grid-cols-2 gap-3">
@@ -195,10 +188,9 @@ export const Navbar: React.FC<NavbarProps> = ({
                   </button>
                 </div>
               </div>
-            </motion.div>
+            </div>
           </>
         )}
-      </AnimatePresence>
     </>
   );
 };

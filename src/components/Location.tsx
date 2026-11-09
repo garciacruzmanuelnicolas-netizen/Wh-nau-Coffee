@@ -1,9 +1,12 @@
-import React from 'react';
-import { motion } from 'motion/react';
+import React, { useEffect, useState } from 'react';
 import { MapPin, Phone, Mail, Navigation, ExternalLink, Clock } from 'lucide-react';
-import { STORE_INFO } from '../data/cafeData';
+import { STORE_INFO } from '../data/store';
 
 export const Location: React.FC = () => {
+  // false en el HTML prerenderizado y en la hidratación; true justo después
+  const [showMap, setShowMap] = useState(false);
+  useEffect(() => setShowMap(true), []);
+
   return (
     <section id="ubicacion" className="scroll-mt-24 py-24 bg-[#F2EBE1] dark:bg-[#231F1E] text-[#1A1716] dark:text-[#FAF6F0] relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -24,12 +27,10 @@ export const Location: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
           
           {/* Left: Google Maps iframe embed */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="lg:col-span-7 rounded-3xl overflow-hidden border border-amber-200/50 dark:border-gray-800 shadow-xl h-[400px] lg:h-full min-h-[380px]"
+          <div
+            className="reveal-left lg:col-span-7 rounded-3xl overflow-hidden border border-amber-200/50 dark:border-gray-800 shadow-xl h-[400px] lg:h-full min-h-[380px]"
           >
+            {showMap ? (
             <iframe
               title="Ubicación de Whānau Coffee en Garrucha"
               src="https://maps.google.com/maps?q=Wh%C4%81nau%20Coffee%20Garrucha%20Calle%20Mayor&t=&z=16&ie=UTF8&iwloc=&output=embed"
@@ -41,14 +42,24 @@ export const Location: React.FC = () => {
               referrerPolicy="no-referrer-when-downgrade"
               className="w-full h-full filter saturate-110"
             />
-          </motion.div>
+            ) : (
+              // En el HTML prerenderizado: hueco del mismo tamaño con enlace a Google Maps.
+              // El mapa (cientos de KB de Google) solo se carga al acercarse a esta sección.
+              <a
+                href={STORE_INFO.googleMapsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full h-full min-h-[380px] flex flex-col items-center justify-center gap-2 bg-[#F2EBE1] dark:bg-[#2A2422] text-[#4B2E2B] dark:text-amber-200 font-medium"
+              >
+                <MapPin className="w-8 h-8" />
+                <span>Ver Whānau Coffee en Google Maps</span>
+              </a>
+            )}
+          </div>
 
           {/* Right: Info Card */}
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="lg:col-span-5 bg-white dark:bg-[#2A2422] rounded-3xl p-8 border border-amber-200/40 dark:border-gray-800 shadow-xl flex flex-col justify-between"
+          <div
+            className="reveal-right lg:col-span-5 bg-white dark:bg-[#2A2422] rounded-3xl p-8 border border-amber-200/40 dark:border-gray-800 shadow-xl flex flex-col justify-between"
           >
             <div>
               <div className="flex items-center space-x-3 mb-6">
@@ -131,7 +142,7 @@ export const Location: React.FC = () => {
                 <span>Llamar</span>
               </a>
             </div>
-          </motion.div>
+          </div>
 
         </div>
       </div>

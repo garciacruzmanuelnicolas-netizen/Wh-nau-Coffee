@@ -1,5 +1,4 @@
 import React from 'react';
-import { motion } from 'motion/react';
 import { Coffee, Utensils, Flame, Sparkles, ArrowRight } from 'lucide-react';
 import { SPECIALTIES } from '../data/cafeData';
 import { responsiveImage } from '../utils/images';
@@ -35,15 +34,11 @@ export const Specialties: React.FC<SpecialtiesProps> = ({ onOpenReservation }) =
 
         {/* 2x2 Grid of Massive Cards */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {SPECIALTIES.map((spec, index) => {
+          {SPECIALTIES.map((spec) => {
             return (
-              <motion.div
+              <div
                 key={spec.id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.15 }}
-                className="group relative rounded-3xl bg-white dark:bg-[#282220] border border-amber-200/40 dark:border-gray-800 shadow-xl overflow-hidden flex flex-col sm:flex-row hover:shadow-2xl transition-all duration-300"
+                className="reveal-up group relative rounded-3xl bg-white dark:bg-[#282220] border border-amber-200/40 dark:border-gray-800 shadow-xl overflow-hidden flex flex-col sm:flex-row hover:shadow-2xl transition-all duration-300"
               >
                 {/* Massive Image Container */}
                 <div className="relative w-full sm:w-1/2 h-64 sm:h-auto overflow-hidden shrink-0">
@@ -95,7 +90,7 @@ export const Specialties: React.FC<SpecialtiesProps> = ({ onOpenReservation }) =
                     </button>
                   </div>
                 </div>
-              </motion.div>
+              </div>
             );
           })}
         </div>

@@ -4,6 +4,7 @@ import { Search, Sparkles, X, Heart, ShoppingBag } from 'lucide-react';
 import { MENU_ITEMS } from '../data/cafeData';
 import { MenuItem } from '../types';
 import { responsiveImage } from '../utils/images';
+import { renderAllSections } from '../utils/sections';
 
 interface MenuProps {
   onSelectItemForReservation?: (item: MenuItem) => void;
@@ -92,7 +93,9 @@ export const Menu: React.FC<MenuProps> = ({ onSelectItemForReservation }) => {
 
         {/* Menu Items Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          <AnimatePresence mode="popLayout">
+          {/* initial={false}: las tarjetas salen visibles en el HTML prerenderizado;
+              al filtrar sí se animan */}
+          <AnimatePresence mode="popLayout" initial={false}>
             {filteredItems.map((item) => (
               <motion.div
                 key={item.id}
@@ -101,7 +104,7 @@ export const Menu: React.FC<MenuProps> = ({ onSelectItemForReservation }) => {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.9 }}
                 transition={{ duration: 0.3 }}
-                onClick={() => setSelectedItem(item)}
+                onClick={() => { renderAllSections(); setSelectedItem(item); }}
                 className="group cursor-pointer rounded-3xl bg-white dark:bg-[#2A2422] border border-gray-100 dark:border-gray-800 shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden flex flex-col hover:-translate-y-1.5"
               >
                 {/* Image Container */}

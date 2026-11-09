@@ -1,8 +1,7 @@
 import React, { useEffect, useRef } from 'react';
-import { motion } from 'motion/react';
 import { Coffee, MapPin, ChevronDown, Sparkles } from 'lucide-react';
-import { STORE_INFO } from '../data/cafeData';
-import { responsiveImage } from '../utils/images';
+import { STORE_INFO } from '../data/store';
+import { renderAllSections } from '../utils/sections';
 
 interface HeroProps {
   onOpenReservation: () => void;
@@ -31,6 +30,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenReservation }) => {
   }, []);
 
   const handleScrollTo = (id: string) => {
+    renderAllSections();
     const elem = document.querySelector(id);
     if (elem) {
       elem.scrollIntoView({ behavior: 'smooth' });
@@ -40,20 +40,16 @@ export const Hero: React.FC<HeroProps> = ({ onOpenReservation }) => {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#1A1716]"
+      className="critical-fonts relative min-h-screen flex items-center justify-center overflow-hidden bg-[#1A1716]"
     >
       {/* Background Image with subtle Parallax */}
-      <div ref={bgRef} className="absolute inset-0 z-0 scale-105 will-change-transform">
-        <img
-          {...responsiveImage(STORE_INFO.heroImage, '100vw')}
-          alt="Café de especialidad Whānau Coffee"
-          className="w-full h-full object-cover"
-          width={1376}
-          height={768}
-          fetchPriority="high"
-          decoding="async"
-        />
-      </div>
+      {/* Foto de fondo (CSS .hero-photo en index.css): decorativa, se pide justo
+          después del primer pintado para no retrasar el título */}
+      <div
+        ref={bgRef}
+        aria-hidden="true"
+        className="hero-photo absolute inset-0 z-0 scale-105 will-change-transform bg-cover bg-center"
+      />
 
       {/* Dark Overlay gradient */}
       <div className="absolute inset-0 z-10 bg-gradient-to-t from-[#1A1716] via-black/60 to-black/70" />
@@ -69,11 +65,8 @@ export const Hero: React.FC<HeroProps> = ({ onOpenReservation }) => {
       {/* Content Container */}
       <div className="relative z-20 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-24 pb-16 flex flex-col items-center">
         {/* Top Badge with Steam Effect */}
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="relative mb-6 inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-amber-200/20 text-amber-100 text-xs sm:text-sm font-medium shadow-xl"
+        <div
+          className="animate-fade-down relative mb-6 inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-amber-200/20 text-amber-100 text-xs sm:text-sm font-medium shadow-xl"
         >
           {/* Steam Effect */}
           <div className="absolute -top-3 left-1/2 -translate-x-1/2 flex space-x-1 pointer-events-none">
@@ -86,7 +79,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenReservation }) => {
           <span>Garrucha • Almería</span>
           <span className="text-amber-200/40">•</span>
           <span className="text-amber-200">Café 100% Arábica</span>
-        </motion.div>
+        </div>
 
         {/* Main Title */}
         <h1
@@ -103,11 +96,8 @@ export const Hero: React.FC<HeroProps> = ({ onOpenReservation }) => {
         </p>
 
         {/* Action Buttons */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto"
+        <div
+          className="animate-fade-up [animation-delay:200ms] flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto"
         >
           <button
             onClick={() => handleScrollTo('#menu')}
@@ -124,31 +114,25 @@ export const Hero: React.FC<HeroProps> = ({ onOpenReservation }) => {
             <MapPin className="w-5 h-5 text-emerald-400" />
             <span>📍 Cómo llegar</span>
           </button>
-        </motion.div>
+        </div>
 
         {/* Quick Address banner */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 0.9 }}
-          className="mt-12 text-xs sm:text-sm text-gray-300/80 flex items-center space-x-2"
+        <div
+          className="animate-fade-in [animation-delay:400ms] mt-12 text-xs sm:text-sm text-gray-300/80 flex items-center space-x-2"
         >
           <MapPin className="w-4 h-4 text-amber-300" />
           <span>Calle Mayor 150, 04630 Garrucha, Almería</span>
-        </motion.div>
+        </div>
       </div>
 
       {/* Bouncing Scroll Down Indicator */}
-      <motion.button
+      <button
         onClick={() => handleScrollTo('#nosotros')}
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: [0, 8, 0] }}
-        transition={{ opacity: { duration: 0.6, delay: 1.2 }, y: { repeat: Infinity, duration: 2, ease: 'easeInOut' } }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 p-3 rounded-full bg-white/10 text-white hover:bg-white/20 backdrop-blur-sm transition-colors border border-white/10"
+        className="animate-bob absolute bottom-8 left-1/2 -translate-x-1/2 z-20 p-3 rounded-full bg-white/10 text-white hover:bg-white/20 backdrop-blur-sm transition-colors border border-white/10"
         aria-label="Desplazarse hacia abajo"
       >
         <ChevronDown className="w-5 h-5 text-amber-200" />
-      </motion.button>
+      </button>
     </section>
   );
 };

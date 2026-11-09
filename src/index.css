@@ -1,5 +1,20 @@
 @import "tailwindcss";
 
+/* Fuentes alojadas en la propia web (sin pedir nada a Google: más rápido y sin
+   enviar la IP de los visitantes a terceros). Solo se descarga el subconjunto
+   de caracteres que se usa (latín + latín extendido para la "ā" de Whānau). */
+@import "@fontsource/poppins/300.css";
+@import "@fontsource/poppins/400.css";
+@import "@fontsource/poppins/500.css";
+@import "@fontsource/poppins/600.css";
+@import "@fontsource/poppins/700.css";
+@import "@fontsource/playfair-display/400.css";
+@import "@fontsource/playfair-display/400-italic.css";
+@import "@fontsource/playfair-display/600.css";
+@import "@fontsource/playfair-display/700.css";
+/* Mini-fuentes de lo que se ve al entrar (scripts/critical-fonts.mjs) */
+@import "./fonts-critical.css";
+
 /* Tailwind v4: el modo oscuro se activa con la clase .dark (botón del navbar) */
 @custom-variant dark (&:where(.dark, .dark *));
 
@@ -35,6 +50,76 @@
   h1, h2, h3, .font-serif {
     font-family: var(--font-serif);
   }
+}
+
+/* Secciones bajo la portada: el navegador no las maqueta ni pinta hasta que están
+   cerca de la pantalla (content-visibility). Las alturas son estimaciones medidas
+   para que la barra de scroll no salte; con "auto" el navegador recuerda la altura
+   real en cuanto la ha pintado una vez. */
+[data-hydrate] {
+  content-visibility: auto;
+  contain-intrinsic-height: auto var(--cv-h, 1000px);
+}
+[data-hydrate="nosotros"] { --cv-h: 1700px; }
+[data-hydrate="menu"] { --cv-h: 11100px; }
+[data-hydrate="especialidades"] { --cv-h: 2580px; }
+[data-hydrate="opiniones"] { --cv-h: 910px; }
+[data-hydrate="cifras"] { --cv-h: 510px; }
+[data-hydrate="horario"] { --cv-h: 905px; }
+[data-hydrate="ubicacion"] { --cv-h: 1285px; }
+[data-hydrate="contacto"] { --cv-h: 1075px; }
+[data-hydrate="pie"] { --cv-h: 980px; }
+@media (min-width: 640px) {
+  [data-hydrate="nosotros"] { --cv-h: 1500px; }
+  [data-hydrate="menu"] { --cv-h: 5900px; }
+  [data-hydrate="especialidades"] { --cv-h: 1720px; }
+  [data-hydrate="opiniones"] { --cv-h: 870px; }
+  [data-hydrate="cifras"] { --cv-h: 540px; }
+  [data-hydrate="horario"] { --cv-h: 945px; }
+  [data-hydrate="ubicacion"] { --cv-h: 1200px; }
+  [data-hydrate="contacto"] { --cv-h: 900px; }
+  [data-hydrate="pie"] { --cv-h: 600px; }
+}
+@media (min-width: 1024px) {
+  [data-hydrate="nosotros"] { --cv-h: 1015px; }
+  [data-hydrate="menu"] { --cv-h: 4050px; }
+  [data-hydrate="especialidades"] { --cv-h: 1170px; }
+  [data-hydrate="opiniones"] { --cv-h: 870px; }
+  [data-hydrate="cifras"] { --cv-h: 310px; }
+  [data-hydrate="horario"] { --cv-h: 945px; }
+  [data-hydrate="ubicacion"] { --cv-h: 770px; }
+  [data-hydrate="contacto"] { --cv-h: 900px; }
+  [data-hydrate="pie"] { --cv-h: 445px; }
+}
+/* Hasta el primer pintado las secciones de abajo ni se maquetan (index.html pone
+   .cv-ready justo después): así sus fotos y fuentes no compiten con la portada */
+html:not(.cv-ready) [data-hydrate] {
+  content-visibility: hidden;
+}
+/* Enlaces internos y modales: se maqueta todo (ver src/utils/sections.ts) */
+html.cv-off [data-hydrate] {
+  content-visibility: visible;
+}
+
+/* Foto de portada: se pide tras el primer pintado; el tamaño depende de la pantalla */
+.cv-ready .hero-photo {
+  background-image: url(/images/hero-640.webp);
+}
+@media (min-width: 480px), (min-resolution: 1.5dppx) {
+  .cv-ready .hero-photo { background-image: url(/images/hero-960.webp); }
+}
+@media (min-width: 1000px), (min-width: 700px) and (min-resolution: 1.5dppx) {
+  .cv-ready .hero-photo { background-image: url(/images/hero-1376.webp); }
+}
+
+/* Cabecera, portada y botones flotantes usan mini-fuentes con solo sus letras: se
+   precargan y están listas en el primer pintado (sin salto de letra). Si falta
+   alguna letra, el navegador usa la fuente completa para ella. */
+.critical-fonts {
+  font-family: 'Poppins Critical', 'Poppins', system-ui, sans-serif;
+}
+.critical-fonts .font-serif {
+  font-family: 'Playfair Critical', 'Playfair Display', Georgia, serif;
 }
 
 /* Custom Utilities */
@@ -82,6 +167,71 @@
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Animaciones de entrada (CSS puro: funcionan desde el primer pintado, sin esperar al JS) */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-16px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes drawerIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: none; }
+}
+/* Solo eje Y: el centrado horizontal lo hace la propiedad `translate` de Tailwind v4 */
+@keyframes bob {
+  0%, 100% { transform: none; }
+  50% { transform: translateY(8px); }
+}
+.animate-fade-up { animation: fadeUp 0.7s ease-out both; }
+.animate-fade-down { animation: fadeDown 0.7s ease-out both; }
+.animate-fade-in { animation: fadeIn 0.6s ease-out both; }
+.animate-drawer-in { animation: drawerIn 0.25s ease-out both; }
+.animate-bob { animation: bob 2s ease-in-out infinite; }
+.animate-pop-in { animation: revealPop 0.25s ease-out both; }
+
+/* Aparición al hacer scroll SIN JavaScript (scroll-driven animations).
+   Donde el navegador no lo soporta, el contenido simplemente se ve. */
+@keyframes revealLeft {
+  from { opacity: 0; transform: translateX(-30px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes revealRight {
+  from { opacity: 0; transform: translateX(30px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes revealPop {
+  from { opacity: 0; transform: scale(0.85); }
+  to { opacity: 1; transform: none; }
+}
+@supports (animation-timeline: view()) {
+  .reveal-up, .reveal-left, .reveal-right, .reveal-pop {
+    animation-duration: auto;
+    animation-timing-function: ease-out;
+    animation-fill-mode: both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 70%;
+  }
+  .reveal-up { animation-name: fadeUp; }
+  .reveal-left { animation-name: revealLeft; }
+  .reveal-right { animation-name: revealRight; }
+  .reveal-pop { animation-name: revealPop; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-up, .reveal-left, .reveal-right, .reveal-pop,
+  .animate-fade-up, .animate-fade-down, .animate-fade-in, .animate-drawer-in, .animate-bob, .animate-pop-in,
+  .steam-particle, .animate-float-bean-slow, .animate-float-bean-fast {
+    animation: none !important;
+  }
 }
 
 /* Coffee Steam Keyframes */

@@ -1,20 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import { motion } from 'motion/react';
+import React from 'react';
 import { Clock, CheckCircle2, XCircle } from 'lucide-react';
-import { WEEKLY_SCHEDULE } from '../data/cafeData';
-import { getCurrentOpeningStatus, getMadridDayIndex } from '../utils/timeUtils';
+import { WEEKLY_SCHEDULE } from '../data/store';
+import { useOpeningStatus } from '../utils/timeUtils';
 
 export const Schedule: React.FC = () => {
-  const [status, setStatus] = useState(getCurrentOpeningStatus());
-  const todayIndex = getMadridDayIndex(); // 0 = Sun, 1 = Mon, ... (hora de España)
-  const currentDayName = WEEKLY_SCHEDULE[todayIndex === 0 ? 6 : todayIndex - 1].day;
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setStatus(getCurrentOpeningStatus());
-    }, 60000);
-    return () => clearInterval(timer);
-  }, []);
+  // null hasta que el navegador conoce la hora real de España (evita desajustes con el HTML prerenderizado)
+  const { status, todayIndex } = useOpeningStatus();
+  const currentDayName =
+    todayIndex === null ? null : WEEKLY_SCHEDULE[todayIndex === 0 ? 6 : todayIndex - 1].day;
 
   return (
     <section id="horario" className="scroll-mt-24 py-24 bg-[#FAF6F0] dark:bg-[#1A1716] text-[#1A1716] dark:text-[#FAF6F0] relative">
@@ -35,27 +28,27 @@ export const Schedule: React.FC = () => {
         {/* Dynamic Status Box */}
         <div className="mb-10 text-center">
           <div
-            className={`inline-flex items-center space-x-3 px-6 py-3 rounded-2xl border text-sm font-semibold shadow-lg backdrop-blur-md ${status.badgeClass}`}
+            className={`inline-flex items-center space-x-3 px-6 py-3 rounded-2xl border text-sm font-semibold shadow-lg backdrop-blur-md ${
+              status ? status.badgeClass : 'invisible'
+            }`}
+            aria-live="polite"
           >
-            {status.isOpen ? (
+            {status?.isOpen ? (
               <CheckCircle2 className="w-5 h-5 text-emerald-600 dark:text-emerald-400 animate-pulse" />
             ) : (
               <XCircle className="w-5 h-5 text-rose-600 dark:text-rose-400" />
             )}
             <div>
-              <span className="text-base">{status.statusText}</span>
+              <span className="text-base">{status?.statusText ?? 'Cerrado ahora'}</span>
               <span className="mx-2 opacity-40">•</span>
-              <span className="font-normal">{status.nextDetail}</span>
+              <span className="font-normal">{status?.nextDetail ?? 'Abre hoy a las 8:00'}</span>
             </div>
           </div>
         </div>
 
         {/* Elegant Schedule Table Card */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="bg-white dark:bg-[#25201E] rounded-3xl border border-amber-200/50 dark:border-gray-800 shadow-xl overflow-hidden p-6 sm:p-8"
+        <div
+          className="reveal-up bg-white dark:bg-[#25201E] rounded-3xl border border-amber-200/50 dark:border-gray-800 shadow-xl overflow-hidden p-6 sm:p-8"
         >
           <div className="divide-y divide-gray-100 dark:divide-gray-800">
             {WEEKLY_SCHEDULE.map((item) => {
@@ -88,7 +81,7 @@ export const Schedule: React.FC = () => {
           <p className="text-center text-xs text-gray-500 dark:text-gray-400 mt-6 pt-4 border-t border-gray-100 dark:border-gray-800">
             * Abierto todos los días festivos en Garrucha. Cocina y cafetera activas ininterrumpidamente.
           </p>
-        </motion.div>
+        </div>
 
       </div>
     </section>

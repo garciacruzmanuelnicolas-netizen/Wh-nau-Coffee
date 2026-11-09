@@ -68,7 +68,7 @@ export const Reviews: React.FC = () => {
 
         {/* Carousel Slider Box */}
         <div className="max-w-3xl mx-auto relative px-4">
-          <AnimatePresence mode="wait">
+          <AnimatePresence mode="wait" initial={false}>
             <motion.div
               key={currentIndex}
               initial={{ opacity: 0, x: 40 }}

@@ -1,7 +1,7 @@
 import React from 'react';
-import { motion } from 'motion/react';
 import { Coffee, Utensils, Heart, Home, Award } from 'lucide-react';
-import { STORE_INFO } from '../data/cafeData';
+import { STORE_INFO } from '../data/store';
+import { responsiveImage } from '../utils/images';
 
 export const About: React.FC = () => {
   const features = [
@@ -50,17 +50,15 @@ export const About: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           
           {/* Left Column - Interior Photo with Floating Badge */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="relative"
-          >
+          <div className="reveal-left relative">
             <div className="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white dark:border-gray-800">
               <img
-                src={STORE_INFO.interiorImage}
+                {...responsiveImage(STORE_INFO.interiorImage, '(min-width: 1024px) 50vw, 100vw')}
                 alt="Interior Whānau Coffee Garrucha"
+                loading="lazy"
+                decoding="async"
+                width={1376}
+                height={768}
                 className="w-full h-[400px] sm:h-[500px] object-cover hover:scale-105 transition-transform duration-700"
                 referrerPolicy="no-referrer"
               />
@@ -68,12 +66,8 @@ export const About: React.FC = () => {
             </div>
 
             {/* Floating Quality Badge */}
-            <motion.div
-              initial={{ scale: 0.8, opacity: 0 }}
-              whileInView={{ scale: 1, opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.4, duration: 0.6 }}
-              className="absolute -bottom-6 -right-2 sm:right-6 bg-white dark:bg-[#2A2422] p-4 sm:p-5 rounded-2xl shadow-xl border border-amber-200/50 dark:border-amber-900/40 flex items-center space-x-3"
+            <div
+              className="reveal-pop absolute -bottom-6 -right-2 sm:right-6 bg-white dark:bg-[#2A2422] p-4 sm:p-5 rounded-2xl shadow-xl border border-amber-200/50 dark:border-amber-900/40 flex items-center space-x-3"
             >
               <div className="w-12 h-12 rounded-xl bg-[#4B2E2B] text-amber-200 flex items-center justify-center shrink-0">
                 <Award className="w-6 h-6" />
@@ -82,17 +76,11 @@ export const About: React.FC = () => {
                 <p className="text-xs text-gray-500 dark:text-gray-400 uppercase font-medium">Ubicación Prima</p>
                 <p className="font-serif font-bold text-base text-[#4B2E2B] dark:text-amber-200">Calle Mayor 150 • Garrucha</p>
               </div>
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
 
           {/* Right Column - Narrative Text & Key Highlights */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="space-y-6"
-          >
+          <div className="reveal-right space-y-6">
             <h3 className="text-2xl sm:text-3xl font-serif font-bold text-[#4B2E2B] dark:text-amber-100 leading-snug">
               En Whānau Coffee creemos que cada taza cuenta una historia.
             </h3>
@@ -107,16 +95,12 @@ export const About: React.FC = () => {
 
             {/* Feature Cards Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
-              {features.map((feat, idx) => {
+              {features.map((feat) => {
                 const IconComponent = feat.icon;
                 return (
-                  <motion.div
+                  <div
                     key={feat.title}
-                    initial={{ opacity: 0, y: 15 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.2 + idx * 0.1, duration: 0.5 }}
-                    className="p-4 rounded-2xl bg-white dark:bg-[#25201E] border border-gray-100 dark:border-gray-800 shadow-sm hover:shadow-md transition-shadow"
+                    className="reveal-up p-4 rounded-2xl bg-white dark:bg-[#25201E] border border-gray-100 dark:border-gray-800 shadow-sm hover:shadow-md transition-shadow"
                   >
                     <div className="flex items-center space-x-3 mb-2">
                       <div className={`w-9 h-9 rounded-xl ${feat.color} flex items-center justify-center shrink-0`}>
@@ -129,11 +113,11 @@ export const About: React.FC = () => {
                     <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed">
                       {feat.description}
                     </p>
-                  </motion.div>
+                  </div>
                 );
               })}
             </div>
-          </motion.div>
+          </div>
 
         </div>
       </div>

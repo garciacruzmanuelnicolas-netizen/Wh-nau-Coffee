@@ -40,7 +40,7 @@ export const Reviews: React.FC = () => {
         {/* Google Rating Summary Badge */}
         <div className="max-w-sm mx-auto mb-12 bg-white dark:bg-[#2B2523] p-6 rounded-3xl border border-amber-200/50 dark:border-gray-800 shadow-xl flex items-center justify-between">
           <div className="flex items-center space-x-3">
-            <div className="w-12 h-12 rounded-2xl bg-amber-500 text-white flex items-center justify-center font-serif font-bold text-xl shadow-md">
+            <div className="w-12 h-12 rounded-2xl bg-amber-700 text-white flex items-center justify-center font-serif font-bold text-xl shadow-md">
               4.4
             </div>
             <div>
@@ -68,7 +68,7 @@ export const Reviews: React.FC = () => {
 
         {/* Carousel Slider Box */}
         <div className="max-w-3xl mx-auto relative px-4">
-          <AnimatePresence mode="wait">
+          <AnimatePresence mode="wait" initial={false}>
             <motion.div
               key={currentIndex}
               initial={{ opacity: 0, x: 40 }}
@@ -94,10 +94,10 @@ export const Reviews: React.FC = () => {
               {/* Author Info */}
               <div className="flex items-center justify-between pt-4 border-t border-gray-100 dark:border-gray-800">
                 <div>
-                  <h4 className="font-serif font-bold text-base text-[#4B2E2B] dark:text-white">
+                  <h3 className="font-serif font-bold text-base text-[#4B2E2B] dark:text-white">
                     {REVIEWS[currentIndex].author}
-                  </h4>
-                  <span className="text-xs text-gray-400">
+                  </h3>
+                  <span className="text-xs text-gray-600 dark:text-gray-400">
                     {REVIEWS[currentIndex].source} • {REVIEWS[currentIndex].date}
                   </span>
                 </div>
@@ -123,16 +123,21 @@ export const Reviews: React.FC = () => {
           </AnimatePresence>
 
           {/* Carousel Dots */}
-          <div className="flex justify-center space-x-2 mt-6">
+          <div className="flex justify-center mt-6">
             {REVIEWS.map((_, idx) => (
               <button
                 key={idx}
                 onClick={() => setCurrentIndex(idx)}
-                className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
-                  currentIndex === idx ? 'w-8 bg-[#4B2E2B] dark:bg-amber-400' : 'bg-gray-300 dark:bg-gray-700'
-                }`}
+                className="min-w-6 h-6 px-1 flex items-center justify-center"
                 aria-label={`Ir a la opinión ${idx + 1}`}
-              />
+                aria-current={currentIndex === idx}
+              >
+                <span
+                  className={`block h-2.5 rounded-full transition-all duration-300 ${
+                    currentIndex === idx ? 'w-8 bg-[#4B2E2B] dark:bg-amber-400' : 'w-2.5 bg-gray-400 dark:bg-gray-600'
+                  }`}
+                />
+              </button>
             ))}
           </div>
         </div>

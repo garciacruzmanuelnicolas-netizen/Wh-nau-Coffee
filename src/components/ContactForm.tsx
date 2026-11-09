@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Send, CheckCircle2, AlertCircle, MessageCircle } from 'lucide-react';
+import { buildWhatsAppUrl } from '../utils/whatsapp';
 
 export const ContactForm: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -32,12 +33,17 @@ export const ContactForm: React.FC = () => {
     e.preventDefault();
     if (!validate()) return;
 
-    setIsSubmitting(true);
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setIsSubmitted(true);
-      setFormData({ name: '', email: '', phone: '', subject: 'Consulta General', message: '' });
-    }, 1200);
+    const lines = [
+      `Hola Whānau Coffee! [${formData.subject}]`,
+      formData.message,
+      '',
+      `— ${formData.name}`,
+      `Email: ${formData.email}`,
+      formData.phone && `Teléfono: ${formData.phone}`,
+    ].filter((l): l is string => typeof l === 'string');
+    window.open(buildWhatsAppUrl(lines.join('\n')), '_blank', 'noopener,noreferrer');
+    setIsSubmitted(true);
+    setFormData({ name: '', email: '', phone: '', subject: 'Consulta General', message: '' });
   };
 
   return (
@@ -73,10 +79,10 @@ export const ContactForm: React.FC = () => {
                   <CheckCircle2 className="w-10 h-10" />
                 </div>
                 <h3 className="text-2xl font-serif font-bold text-[#4B2E2B] dark:text-white">
-                  ¡Mensaje Enviado con Éxito!
+                  ¡Mensaje preparado!
                 </h3>
                 <p className="text-sm text-gray-600 dark:text-gray-300 max-w-md mx-auto">
-                  Muchas gracias por contactar con Whānau Coffee. Te responderemos en menos de 24 horas.
+                  Hemos abierto WhatsApp con tu mensaje: pulsa enviar allí y te responderemos lo antes posible. Si no se abrió, llámanos al 649 18 91 74.
                 </p>
                 <button
                   onClick={() => setIsSubmitted(false)}
@@ -90,10 +96,10 @@ export const ContactForm: React.FC = () => {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   {/* Nombre */}
                   <div>
-                    <label className="block text-xs uppercase font-semibold text-gray-600 dark:text-gray-300 mb-2">
+                    <label htmlFor="contact-field-1" className="block text-xs uppercase font-semibold text-gray-600 dark:text-gray-300 mb-2">
                       Nombre completo *
                     </label>
-                    <input
+                    <input id="contact-field-1"
                       type="text"
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
@@ -111,10 +117,10 @@ export const ContactForm: React.FC = () => {
 
                   {/* Correo */}
                   <div>
-                    <label className="block text-xs uppercase font-semibold text-gray-600 dark:text-gray-300 mb-2">
+                    <label htmlFor="contact-field-2" className="block text-xs uppercase font-semibold text-gray-600 dark:text-gray-300 mb-2">
                       Correo electrónico *
                     </label>
-                    <input
+                    <input id="contact-field-2"
                       type="email"
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
@@ -134,10 +140,10 @@ export const ContactForm: React.FC = () => {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   {/* Teléfono */}
                   <div>
-                    <label className="block text-xs uppercase font-semibold text-gray-600 dark:text-gray-300 mb-2">
+                    <label htmlFor="contact-field-3" className="block text-xs uppercase font-semibold text-gray-600 dark:text-gray-300 mb-2">
                       Teléfono (Opcional)
                     </label>
-                    <input
+                    <input id="contact-field-3"
                       type="tel"
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
@@ -148,10 +154,10 @@ export const ContactForm: React.FC = () => {
 
                   {/* Asunto */}
                   <div>
-                    <label className="block text-xs uppercase font-semibold text-gray-600 dark:text-gray-300 mb-2">
+                    <label htmlFor="contact-field-4" className="block text-xs uppercase font-semibold text-gray-600 dark:text-gray-300 mb-2">
                       Asunto de la consulta
                     </label>
-                    <select
+                    <select id="contact-field-4"
                       value={formData.subject}
                       onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
                       className="w-full px-4 py-3.5 rounded-2xl bg-gray-50 dark:bg-[#2D2725] border border-gray-200 dark:border-gray-700 text-sm focus:outline-none focus:ring-2 focus:ring-[#4B2E2B] dark:focus:ring-amber-400"
@@ -166,10 +172,10 @@ export const ContactForm: React.FC = () => {
 
                 {/* Mensaje */}
                 <div>
-                  <label className="block text-xs uppercase font-semibold text-gray-600 dark:text-gray-300 mb-2">
+                  <label htmlFor="contact-field-5" className="block text-xs uppercase font-semibold text-gray-600 dark:text-gray-300 mb-2">
                     Mensaje *
                   </label>
-                  <textarea
+                  <textarea id="contact-field-5"
                     rows={4}
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
@@ -196,7 +202,7 @@ export const ContactForm: React.FC = () => {
                   ) : (
                     <>
                       <Send className="w-5 h-5 text-amber-200" />
-                      <span>Enviar Mensaje</span>
+                      <span>Enviar por WhatsApp</span>
                     </>
                   )}
                 </button>

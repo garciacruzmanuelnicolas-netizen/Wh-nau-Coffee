@@ -1,0 +1,49 @@
+/* Generado por scripts/critical-fonts.mjs (npm run fonts:critical): no editar a mano */
+@font-face {
+  font-family: 'Playfair Critical';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('./assets/fonts/critical/critical-playfair-700-lat.woff2') format('woff2');
+  unicode-range: U+20, U+41, U+43, U+45, U+46, U+48, U+4E, U+4F, U+55, U+57, U+61, U+63, U+65, U+66, U+68, U+6E, U+6F, U+75, U+77;
+}
+@font-face {
+  font-family: 'Playfair Critical';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('./assets/fonts/critical/critical-playfair-700-ext.woff2') format('woff2');
+  unicode-range: U+100, U+101;
+}
+@font-face {
+  font-family: 'Playfair Critical';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url('./assets/fonts/critical/critical-playfair-400-italic-lat.woff2') format('woff2');
+  unicode-range: U+20, U+22, U+2C, U+2E, U+41, U+42, U+43, U+44, U+45, U+46, U+47, U+48, U+49, U+4A, U+4C, U+4D, U+4E, U+4F, U+50, U+52, U+53, U+54, U+55, U+59, U+61, U+62, U+63, U+64, U+65, U+66, U+67, U+68, U+69, U+6A, U+6C, U+6D, U+6E, U+6F, U+70, U+72, U+73, U+74, U+75, U+79, U+C9, U+E9;
+}
+@font-face {
+  font-family: 'Poppins Critical';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('./assets/fonts/critical/critical-poppins-400-lat.woff2') format('woff2');
+  unicode-range: U+20, U+2C, U+30, U+31, U+33, U+34, U+35, U+36, U+41, U+43, U+45, U+47, U+48, U+4C, U+4D, U+4F, U+52, U+55, U+59, U+61, U+63, U+65, U+67, U+68, U+6C, U+6D, U+6F, U+72, U+75, U+79, U+CD, U+ED;
+}
+@font-face {
+  font-family: 'Poppins Critical';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('./assets/fonts/critical/critical-poppins-500-lat.woff2') format('woff2');
+  unicode-range: U+20, U+25, U+30, U+31, U+41, U+42, U+43, U+44, U+45, U+46, U+47, U+48, U+49, U+4C, U+4D, U+4E, U+4F, U+50, U+52, U+53, U+54, U+55, U+56, U+61, U+62, U+63, U+64, U+65, U+66, U+67, U+68, U+69, U+6C, U+6D, U+6E, U+6F, U+70, U+72, U+73, U+74, U+75, U+76, U+C1, U+C9, U+CD, U+D3, U+DA, U+E1, U+E9, U+ED, U+F3, U+FA, U+2022;
+}
+@font-face {
+  font-family: 'Poppins Critical';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('./assets/fonts/critical/critical-poppins-600-lat.woff2') format('woff2');
+  unicode-range: U+20, U+41, U+43, U+45, U+46, U+47, U+48, U+4F, U+50, U+52, U+53, U+54, U+55, U+57, U+61, U+63, U+65, U+66, U+67, U+68, U+6F, U+70, U+72, U+73, U+74, U+75, U+77, U+2022;
+}

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { X, Calendar, Clock, Users, CheckCircle2, Coffee } from 'lucide-react';
 import { MenuItem } from '../types';
+import { buildWhatsAppUrl, todayLocalISO } from '../utils/whatsapp';
 
 interface ReservationModalProps {
   isOpen: boolean;
@@ -18,7 +19,7 @@ export const ReservationModal: React.FC<ReservationModalProps> = ({
     name: '',
     email: '',
     phone: '',
-    date: new Date().toISOString().split('T')[0],
+    date: todayLocalISO(),
     time: '10:00',
     guests: 2,
     notes: '',
@@ -38,12 +39,19 @@ export const ReservationModal: React.FC<ReservationModalProps> = ({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
-
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setIsConfirmed(true);
-    }, 1200);
+    const [y, m, d] = formData.date.split('-');
+    const lines = [
+      'Hola Whānau Coffee! Quisiera reservar mesa:',
+      `• Nombre: ${formData.name}`,
+      `• Fecha: ${d}/${m}/${y} a las ${formData.time}`,
+      `• Comensales: ${formData.guests}`,
+      formData.phone && `• Teléfono: ${formData.phone}`,
+      formData.email && `• Email: ${formData.email}`,
+      formData.notes && `• Notas: ${formData.notes}`,
+    ].filter(Boolean);
+    // Se abre de forma síncrona para que el navegador no bloquee la ventana
+    window.open(buildWhatsAppUrl(lines.join('\n')), '_blank', 'noopener,noreferrer');
+    setIsConfirmed(true);
   };
 
   const resetAndClose = () => {
@@ -96,7 +104,7 @@ export const ReservationModal: React.FC<ReservationModalProps> = ({
                   <CheckCircle2 className="w-10 h-10" />
                 </div>
                 <h4 className="font-serif font-bold text-2xl text-[#4B2E2B] dark:text-amber-200">
-                  ¡Reserva Confirmada!
+                  ¡Solicitud lista!
                 </h4>
                 <div className="bg-amber-50 dark:bg-[#2D2725] p-4 rounded-2xl text-xs space-y-1 text-left border border-amber-200/50">
                   <p><strong>Nombre:</strong> {formData.name}</p>
@@ -105,7 +113,7 @@ export const ReservationModal: React.FC<ReservationModalProps> = ({
                   {selectedItem && <p><strong>Producto de interés:</strong> {selectedItem.name}</p>}
                 </div>
                 <p className="text-xs text-gray-500">
-                  Te hemos enviado un recordatorio al correo electrónico. ¡Te esperamos en Garrucha!
+                  Hemos abierto WhatsApp con tu reserva. Pulsa enviar allí y te confirmaremos la mesa lo antes posible. Si no se abrió, llámanos o escríbenos al 649 18 91 74.
                 </p>
                 <button
                   onClick={resetAndClose}
@@ -127,23 +135,24 @@ export const ReservationModal: React.FC<ReservationModalProps> = ({
 
                 <div className="grid grid-cols-2 gap-3">
                   <div>
-                    <label className="block text-[11px] uppercase font-bold text-gray-500 mb-1 flex items-center gap-1">
+                    <label htmlFor="res-field-1" className="block text-[11px] uppercase font-bold text-gray-500 mb-1 flex items-center gap-1">
                       <Calendar className="w-3.5 h-3.5" /> Fecha
                     </label>
-                    <input
+                    <input id="res-field-1"
                       type="date"
                       value={formData.date}
                       onChange={(e) => setFormData({ ...formData, date: e.target.value })}
+                      min={todayLocalISO()}
                       required
                       className="w-full px-3 py-2.5 rounded-xl bg-gray-50 dark:bg-[#2D2725] border border-gray-200 dark:border-gray-700 text-xs focus:ring-2 focus:ring-[#4B2E2B]"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-[11px] uppercase font-bold text-gray-500 mb-1 flex items-center gap-1">
+                    <label htmlFor="res-field-2" className="block text-[11px] uppercase font-bold text-gray-500 mb-1 flex items-center gap-1">
                       <Clock className="w-3.5 h-3.5" /> Hora
                     </label>
-                    <select
+                    <select id="res-field-2"
                       value={formData.time}
                       onChange={(e) => setFormData({ ...formData, time: e.target.value })}
                       className="w-full px-3 py-2.5 rounded-xl bg-gray-50 dark:bg-[#2D2725] border border-gray-200 dark:border-gray-700 text-xs focus:ring-2 focus:ring-[#4B2E2B]"
@@ -162,10 +171,10 @@ export const ReservationModal: React.FC<ReservationModalProps> = ({
                 </div>
 
                 <div>
-                  <label className="block text-[11px] uppercase font-bold text-gray-500 mb-1 flex items-center gap-1">
+                  <label htmlFor="res-field-3" className="block text-[11px] uppercase font-bold text-gray-500 mb-1 flex items-center gap-1">
                     <Users className="w-3.5 h-3.5" /> Personas
                   </label>
-                  <select
+                  <select id="res-field-3"
                     value={formData.guests}
                     onChange={(e) => setFormData({ ...formData, guests: parseInt(e.target.value) })}
                     className="w-full px-3 py-2.5 rounded-xl bg-gray-50 dark:bg-[#2D2725] border border-gray-200 dark:border-gray-700 text-xs focus:ring-2 focus:ring-[#4B2E2B]"
@@ -179,10 +188,10 @@ export const ReservationModal: React.FC<ReservationModalProps> = ({
                 </div>
 
                 <div>
-                  <label className="block text-[11px] uppercase font-bold text-gray-500 mb-1">
+                  <label htmlFor="res-field-4" className="block text-[11px] uppercase font-bold text-gray-500 mb-1">
                     Nombre completo *
                   </label>
-                  <input
+                  <input id="res-field-4"
                     type="text"
                     required
                     placeholder="Tu nombre y apellidos"
@@ -194,10 +203,10 @@ export const ReservationModal: React.FC<ReservationModalProps> = ({
 
                 <div className="grid grid-cols-2 gap-3">
                   <div>
-                    <label className="block text-[11px] uppercase font-bold text-gray-500 mb-1">
+                    <label htmlFor="res-field-5" className="block text-[11px] uppercase font-bold text-gray-500 mb-1">
                       Correo *
                     </label>
-                    <input
+                    <input id="res-field-5"
                       type="email"
                       required
                       placeholder="correo@ejemplo.com"
@@ -208,10 +217,10 @@ export const ReservationModal: React.FC<ReservationModalProps> = ({
                   </div>
 
                   <div>
-                    <label className="block text-[11px] uppercase font-bold text-gray-500 mb-1">
+                    <label htmlFor="res-field-6" className="block text-[11px] uppercase font-bold text-gray-500 mb-1">
                       Teléfono *
                     </label>
-                    <input
+                    <input id="res-field-6"
                       type="tel"
                       required
                       placeholder="600 00 00 00"
@@ -223,10 +232,10 @@ export const ReservationModal: React.FC<ReservationModalProps> = ({
                 </div>
 
                 <div>
-                  <label className="block text-[11px] uppercase font-bold text-gray-500 mb-1">
+                  <label htmlFor="res-field-7" className="block text-[11px] uppercase font-bold text-gray-500 mb-1">
                     Peticiones especiales / Alergias
                   </label>
-                  <textarea
+                  <textarea id="res-field-7"
                     rows={2}
                     placeholder="Mesa en terraza, trona de bebé, etc."
                     value={formData.notes}
@@ -240,7 +249,7 @@ export const ReservationModal: React.FC<ReservationModalProps> = ({
                   disabled={isSubmitting}
                   className="w-full py-3.5 rounded-xl bg-[#4B2E2B] text-white font-medium text-sm hover:bg-[#351F1D] transition-colors shadow-lg mt-2"
                 >
-                  {isSubmitting ? 'Confirmando...' : 'Confirmar Reserva de Mesa'}
+                  {isSubmitting ? 'Abriendo WhatsApp...' : 'Reservar por WhatsApp'}
                 </button>
               </form>
             )}

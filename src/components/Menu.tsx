@@ -3,6 +3,8 @@ import { motion, AnimatePresence } from 'motion/react';
 import { Search, Sparkles, X, Heart, ShoppingBag } from 'lucide-react';
 import { MENU_ITEMS } from '../data/cafeData';
 import { MenuItem } from '../types';
+import { responsiveImage } from '../utils/images';
+import { renderAllSections } from '../utils/sections';
 
 interface MenuProps {
   onSelectItemForReservation?: (item: MenuItem) => void;
@@ -64,7 +66,7 @@ export const Menu: React.FC<MenuProps> = ({ onSelectItemForReservation }) => {
             {searchQuery && (
               <button
                 onClick={() => setSearchQuery('')}
-                className="absolute right-4 top-1/2 -translate-y-1/2 text-xs text-gray-400 hover:text-gray-600"
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-xs text-gray-600 hover:text-gray-800"
               >
                 Limpiar
               </button>
@@ -91,7 +93,9 @@ export const Menu: React.FC<MenuProps> = ({ onSelectItemForReservation }) => {
 
         {/* Menu Items Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          <AnimatePresence mode="popLayout">
+          {/* initial={false}: las tarjetas salen visibles en el HTML prerenderizado;
+              al filtrar sí se animan */}
+          <AnimatePresence mode="popLayout" initial={false}>
             {filteredItems.map((item) => (
               <motion.div
                 key={item.id}
@@ -100,14 +104,18 @@ export const Menu: React.FC<MenuProps> = ({ onSelectItemForReservation }) => {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.9 }}
                 transition={{ duration: 0.3 }}
-                onClick={() => setSelectedItem(item)}
+                onClick={() => { renderAllSections(); setSelectedItem(item); }}
                 className="group cursor-pointer rounded-3xl bg-white dark:bg-[#2A2422] border border-gray-100 dark:border-gray-800 shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden flex flex-col hover:-translate-y-1.5"
               >
                 {/* Image Container */}
                 <div className="relative h-52 overflow-hidden bg-gray-100 dark:bg-gray-800">
                   <img
-                    src={item.image}
+                    {...responsiveImage(item.image, '(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw')}
                     alt={item.name}
+                    loading="lazy"
+                    decoding="async"
+                    width={800}
+                    height={533}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                     referrerPolicy="no-referrer"
                   />
@@ -120,7 +128,7 @@ export const Menu: React.FC<MenuProps> = ({ onSelectItemForReservation }) => {
 
                   {/* Featured Badge */}
                   {item.featured && (
-                    <div className="absolute top-4 left-4 bg-amber-500 text-white text-[11px] font-semibold tracking-wider uppercase px-2.5 py-1 rounded-full shadow-md flex items-center space-x-1">
+                    <div className="absolute top-4 left-4 bg-amber-700 text-white text-[11px] font-semibold tracking-wider uppercase px-2.5 py-1 rounded-full shadow-md flex items-center space-x-1">
                       <Sparkles className="w-3 h-3" />
                       <span>Destacado</span>
                     </div>
@@ -198,8 +206,9 @@ export const Menu: React.FC<MenuProps> = ({ onSelectItemForReservation }) => {
 
               <div className="relative h-64">
                 <img
-                  src={selectedItem.image}
+                  {...responsiveImage(selectedItem.image, '(min-width: 768px) 672px, 100vw')}
                   alt={selectedItem.name}
+                  decoding="async"
                   className="w-full h-full object-cover"
                   referrerPolicy="no-referrer"
                 />

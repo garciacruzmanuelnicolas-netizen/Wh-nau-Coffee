@@ -1,20 +1,10 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://ai.google.dev/static/site-assets/images/share-ais-513315318.png" />
-</div>
+# Whānau Coffee
 
-# Run and deploy your AI Studio app
+Web de Whānau Coffee, café de especialidad en Calle Mayor 150, Garrucha (Almería).
 
-This contains everything you need to run your app locally.
+Sitio estático, sin build: `index.html`, `css/`, `js/`, `vendor/`, `fonts/`, `frames/` e `img/`.
 
-View your app in AI Studio: https://ai.studio/apps/65c1ceef-1911-403b-b7b6-65b6e5e7b942
+- Ver en local: `python3 -m http.server` y abrir `http://localhost:8000`.
+- Publicar: importar el repositorio en Vercel o Netlify (sin comando de build, carpeta raíz `/`).
 
-## Run Locally
-
-**Prerequisites:**  Node.js
-
-
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+Datos editables: número de WhatsApp (`data-wa` en `<body>` y enlaces `wa.me`), precios, opiniones y horario (`index.html` y `HOURS` en `js/main.js`).

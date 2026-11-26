@@ -1,103 +1,359 @@
 <!doctype html>
-<html lang="es" class="scroll-smooth">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Whānau Coffee | Cafetería de Especialidad en Garrucha, Almería</title>
-    
-    <!-- Favicon / Logo -->
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="apple-touch-icon" href="/favicon.svg" />
-    <link rel="shortcut icon" href="/favicon.svg" />
-    
-    <!-- Primary Meta Tags -->
-    <meta name="title" content="Whānau Coffee | Cafetería de Especialidad en Garrucha" />
-    <meta name="description" content="Disfruta del mejor café de especialidad, desayunos irresistibles, tostadas gourmet, hamburguesas y un ambiente acogedor en Whānau Coffee, Garrucha, Almería." />
-    <meta name="keywords" content="cafeteria garrucha, cafe especialidad garrucha, desayunos garrucha, whanau coffee, tostadas gourmet garrucha, restaurante garrucha, calle mayor garrucha" />
-    <meta name="author" content="Whānau Coffee" />
-    <meta name="robots" content="index, follow" />
-    <link rel="canonical" href="https://whanaucoffee.es/" />
+<html lang="es" data-flavor="clara">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Whānau Coffee — Café de especialidad en Garrucha</title>
+<meta name="description" content="Café de especialidad, tostadas de masa madre y terraza en Calle Mayor 150, Garrucha (Almería). Pide por WhatsApp y recógelo sin esperar.">
+<meta name="theme-color" content="#F5EEE6">
+<link rel="canonical" href="https://whanaucoffee.es/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://whanaucoffee.es/">
+<meta property="og:title" content="Whānau Coffee — Café de especialidad en Garrucha">
+<meta property="og:description" content="Café de especialidad, tostadas de masa madre y terraza en Calle Mayor 150. Abrimos todos los días desde las 7:30.">
+<meta property="og:image" content="https://whanaucoffee.es/img/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="fonts/jakarta.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="frames/hero/d/0001.webp" as="image" type="image/webp" media="(min-width: 901px)" fetchpriority="high">
+<link rel="preload" href="frames/hero/m/0001.webp" as="image" type="image/webp" media="(max-width: 900px)" fetchpriority="high">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%228%22 fill=%22%231F1512%22/%3E%3Ccircle cx=%2216%22 cy=%2216%22 r=%227%22 fill=%22%23C4652B%22/%3E%3C/svg%3E">
+<link rel="stylesheet" href="css/styles.css">
+<script>
+  document.documentElement.classList.add('js');
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('motion');
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CafeOrCoffeeShop",
+  "name": "Whānau Coffee",
+  "image": "https://whanaucoffee.es/img/og.jpg",
+  "url": "https://whanaucoffee.es",
+  "telephone": "+34649189174",
+  "priceRange": "€",
+  "servesCuisine": ["Café de especialidad", "Desayunos", "Tostadas", "Hamburguesas"],
+  "address": { "@type": "PostalAddress", "streetAddress": "Calle Mayor 150", "addressLocality": "Garrucha", "postalCode": "04630", "addressRegion": "Almería", "addressCountry": "ES" },
+  "geo": { "@type": "GeoCoordinates", "latitude": 37.1822, "longitude": -1.8228 },
+  "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.4", "reviewCount": "53" },
+  "openingHoursSpecification": [
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday"], "opens": "07:30", "closes": "22:00" },
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": "Friday", "opens": "07:30", "closes": "23:00" },
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "08:00", "closes": "23:00" },
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": "Sunday", "opens": "08:00", "closes": "21:00" }
+  ]
+}
+</script>
+</head>
+<body data-wa="34649189174">
+<div class="progress" aria-hidden="true"></div>
 
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://whanaucoffee.es/" />
-    <meta property="og:title" content="Whānau Coffee | Cafetería de Especialidad en Garrucha" />
-    <meta property="og:description" content="Disfruta del mejor café de especialidad, desayunos irresistibles y el mejor ambiente de Garrucha. Visítanos en Calle Mayor 150." />
-    <meta property="og:image" content="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=1200&q=80" />
+<header class="nav">
+  <nav class="nav__bar" aria-label="Principal">
+    <a href="#top" class="logo">Whānau<i>.</i></a>
+    <ul class="nav__links">
+      <li><a href="#carta" data-nav="carta">Carta</a></li>
+      <li><a href="#arma" data-nav="arma">Tu café</a></li>
+      <li><a href="#proceso" data-nav="proceso">Cómo lo hacemos</a></li>
+      <li><a href="#opiniones" data-nav="opiniones">Opiniones</a></li>
+      <li><a href="#visitanos" data-nav="visitanos">Visítanos</a></li>
+    </ul>
+    <div class="nav__cta">
+      <a class="btn btn--ghost btn--sm" href="#visitanos" data-open="reserva">Reservar</a>
+      <a class="btn btn--accent btn--sm" href="#arma">Pedir ya <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10m-4-4 4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </div>
+  </nav>
+</header>
 
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content="https://whanaucoffee.es/" />
-    <meta property="twitter:title" content="Whānau Coffee | Cafetería en Garrucha" />
-    <meta property="twitter:description" content="Café de especialidad, desayunos irresistibles y ambiente acogedor en Calle Mayor 150, Garrucha." />
-    <meta property="twitter:image" content="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=1200&q=80" />
+<main id="top">
+  <!-- 1. RECORRIDO -->
+  <section class="journey" id="journey" data-stack data-cuts="0,0.12,0.3,0.5,0.72,0.88" aria-label="Así preparamos tu café">
+    <div class="journey__stage">
+      <div class="journey__copy">
+        <div class="step" data-step="0">
+          <p class="eyebrow">Café de especialidad · Garrucha</p>
+          <h1 class="display">Café de verdad. <em>En Calle Mayor.</em></h1>
+          <p class="lead">Arábica de especialidad, tostadas de masa madre y terraza al sol. Pídelo por WhatsApp y te lo tenemos listo.</p>
+          <div class="hero__actions">
+            <a class="btn btn--accent" href="#carta">Ver la carta <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10m-4-4 4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a class="btn btn--ghost" href="https://wa.me/34649189174">649 18 91 74</a>
+          </div>
+          <div class="stats"><div><b>4,4★</b><span>en Google</span></div><div><b>53</b><span>opiniones</span></div><div><b>7:30</b><span>abrimos</span></div></div>
+        </div>
+        <div class="step" data-step="1">
+          <p class="eyebrow">Paso 1 · El grano</p>
+          <h2 class="display">100&nbsp;% arábica. <em>Molido al momento.</em></h2>
+          <p class="lead">Nada de café molido de ayer: cada taza empieza con el grano entero, justo cuando lo pides.</p>
+          <div class="ui-card">
+            <div class="ui-card__dark"><div><small>Tu pedido</small><strong>W-012</strong></div><span class="badge">Barra<br>1</span></div>
+            <p style="margin:.7rem 0 0"><span class="dot"></span>Preparando · listo en ~4 min</p>
+          </div>
+        </div>
+        <div class="step" data-step="2">
+          <p class="eyebrow">Paso 2 · La extracción</p>
+          <h2 class="display">18&nbsp;g. 27&nbsp;s. <em>93&nbsp;°C.</em></h2>
+          <p class="lead">Medimos cada espresso para que sepa igual de bien el lunes a las 7:30 que el sábado por la tarde.</p>
+          <div class="ui-card">
+            <div class="row"><span>Dosis</span><b>18 g</b></div>
+            <div class="row"><span>Tiempo</span><b>27 s</b></div>
+            <div class="row"><span>Agua</span><b>93 °C</b></div>
+            <div class="row" style="border:0"><span>Resultado</span><b>Doble espresso</b></div>
+          </div>
+        </div>
+        <div class="step" data-step="3">
+          <p class="eyebrow">Paso 3 · Capa a capa</p>
+          <h2 class="display">Cuatro capas. <em>Cero prisas.</em></h2>
+          <p class="lead">Espresso, leche, microespuma y el dibujo de arriba. Así se ve un capuccino por dentro.</p>
+        </div>
+        <div class="step" data-step="4">
+          <p class="eyebrow">Paso 4 · La leche</p>
+          <h2 class="display">Sedosa a 62&nbsp;°C. <em>Nunca quemada.</em></h2>
+          <p class="lead">Entera, de avena o sin lactosa. Tú eliges; nosotros la texturizamos al punto.</p>
+          <div class="ui-card">
+            <div class="row"><span>Capuccino</span><b>2,40 €</b></div>
+            <div class="row"><span>Leche de avena</span><b>+0,30 €</b></div>
+            <div class="row" style="border:0"><span>Total</span><b>2,70 €</b></div>
+          </div>
+        </div>
+        <div class="step" data-step="5">
+          <p class="eyebrow">Paso 5 · Tu taza</p>
+          <h2 class="display">Lista en 4&nbsp;minutos. <em>Sin colas.</em></h2>
+          <p class="lead">Pide por WhatsApp desde la playa o desde casa y recógelo en barra.</p>
+          <div class="hero__actions">
+            <a class="btn btn--accent" href="#arma">Pedir mi café <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10m-4-4 4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </div>
+      </div>
 
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+      <div class="journey__visual" aria-hidden="true">
+        <picture>
+          <source media="(max-width: 900px)" srcset="frames/hero/m/0001.webp">
+          <img src="frames/hero/d/0001.webp" width="1280" height="960" alt="" fetchpriority="high">
+        </picture>
+        <canvas></canvas>
+        <span class="hotspot hotspot--l" style="left:3%;top:19%" data-at="0.52-0.74"><b>01</b>Microespuma con dibujo</span>
+        <span class="hotspot hotspot--r" style="left:67%;top:30%" data-at="0.54-0.74"><b>02</b>Leche a 62 °C</span>
+        <span class="hotspot hotspot--l" style="left:3%;top:42%" data-at="0.56-0.74"><b>03</b>Doble espresso · 18 g</span>
+        <span class="hotspot hotspot--r" style="left:67%;top:59%" data-at="0.58-0.74"><b>04</b>Taza de cerámica</span>
+        <p class="script annot">molido al momento,<br>como debe ser</p>
+      </div>
 
-    <!-- Schema.org JSON-LD for Local Business -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "CafeOrCoffeeShop",
-      "name": "Whānau Coffee",
-      "image": "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Calle Mayor 150",
-        "addressLocality": "Garrucha",
-        "postalCode": "04630",
-        "addressRegion": "Almería",
-        "addressCountry": "ES"
-      },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": 37.1822,
-        "longitude": -1.8228
-      },
-      "url": "https://whanaucoffee.es",
-      "telephone": "+34649189174",
-      "servesCuisine": ["Coffee", "Breakfast", "Burgers", "Mediterranean", "Café de Especialidad"],
-      "priceRange": "€€",
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.4",
-        "reviewCount": "53"
-      },
-      "openingHoursSpecification": [
-        {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday"],
-          "opens": "07:30",
-          "closes": "22:00"
-        },
-        {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": "Friday",
-          "opens": "07:30",
-          "closes": "23:00"
-        },
-        {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": "Saturday",
-          "opens": "08:00",
-          "closes": "23:00"
-        },
-        {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": "Sunday",
-          "opens": "08:00",
-          "closes": "21:00"
-        }
-      ]
-    }
-    </script>
-  </head>
-  <body class="bg-[#FAF6F0] text-[#1A1716] font-sans antialiased selection:bg-[#4B2E2B] selection:text-white overflow-x-hidden">
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+      <div class="steps-bar">
+        <div class="steps-bar__item" aria-hidden="true"><small>01</small>Hola<i></i></div>
+        <div class="steps-bar__item" aria-hidden="true"><small>02</small>El grano<i></i></div>
+        <div class="steps-bar__item" aria-hidden="true"><small>03</small>Extracción<i></i></div>
+        <div class="steps-bar__item" aria-hidden="true"><small>04</small>Capas<i></i></div>
+        <div class="steps-bar__item" aria-hidden="true"><small>05</small>La leche<i></i></div>
+        <div class="steps-bar__item" aria-hidden="true"><small>06</small>Tu taza<i></i></div>
+        <a class="steps-bar__skip" href="#carta">Saltar ↓</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. CINTA -->
+  <div class="ribbon" aria-hidden="true"><div class="ribbon__track">
+    <span>Café de especialidad</span><span>Tostadas de masa madre</span><span>Terraza en Calle Mayor</span><span>Abierto desde las 7:30</span>
+    <span>Café de especialidad</span><span>Tostadas de masa madre</span><span>Terraza en Calle Mayor</span><span>Abierto desde las 7:30</span>
+  </div></div>
+
+  <!-- 3. CARTA -->
+  <section class="panel panel--surface" id="carta" data-stack data-section="carta">
+    <div class="container split">
+      <div>
+        <p class="eyebrow">La carta</p>
+        <h2 class="display display--md" data-split>Tres cafés. <em>Cero dudas.</em></h2>
+        <p class="lead">Los que más salen de la barra. Además: latte, flat white, chocolate al 70 %, frappés, zumo recién exprimido, tostadas y hamburguesa de la casa.</p>
+        <a class="btn btn--line btn--sm" style="margin-top:1.6rem" href="https://wa.me/34649189174?text=Hola%2C%20%C2%BFme%20pas%C3%A1is%20la%20carta%20completa%3F">Pedir la carta completa</a>
+      </div>
+      <div class="cards">
+        <article class="card" data-reveal>
+          <div class="card__media"><span class="tag">Intenso</span><img src="img/espresso.webp" width="800" height="600" alt="Espresso en taza pequeña con crema" loading="lazy" decoding="async"></div>
+          <div class="card__body">
+            <div class="card__title"><h3>Espresso</h3><span class="price">1,60<sup>€</sup></span></div>
+            <p>Arábica de especialidad con crema densa y equilibrada.</p>
+            <div class="card__foot"><button class="btn btn--line btn--sm" data-add="Espresso">+ Añadir</button><span class="icon-btn" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10m-4-4 4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+          </div>
+        </article>
+        <article class="card card--featured" data-reveal="1">
+          <div class="card__media"><span class="tag">El favorito</span><img src="img/capuccino.webp" width="800" height="600" alt="Capuccino con dibujo de espuma" loading="lazy" decoding="async"></div>
+          <div class="card__body">
+            <div class="card__title"><h3>Capuccino</h3><span class="price">2,40<sup>€</sup></span></div>
+            <p>Espresso, leche sedosa y espuma con cacao o canela.</p>
+            <div class="card__foot"><button class="btn btn--line btn--sm" data-add="Capuccino">+ Añadir</button><span class="icon-btn" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10m-4-4 4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+          </div>
+        </article>
+        <article class="card" data-reveal="2">
+          <div class="card__media"><span class="tag">De la casa</span><img src="img/irlandes.webp" width="800" height="600" alt="Café irlandés en copa con nata" loading="lazy" decoding="async"></div>
+          <div class="card__body">
+            <div class="card__title"><h3>Café Irlandés</h3><span class="price">4,50<sup>€</sup></span></div>
+            <p>Espresso, whisky irlandés, azúcar de caña y nata fría.</p>
+            <div class="card__foot"><button class="btn btn--line btn--sm" data-add="Café Irlandés">+ Añadir</button><span class="icon-btn" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10m-4-4 4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. CONFIGURADOR -->
+  <section class="panel panel--deep" id="arma" data-stack data-section="arma">
+    <div class="container config">
+      <div class="spin" data-spin data-frames="36" data-src="frames/turn/{n}.webp" tabindex="0" role="img" aria-label="Capuccino en 3D. Arrastra o usa las flechas para girarlo.">
+        <img src="frames/turn/0001.webp" width="800" height="600" alt="" loading="lazy" decoding="async"><canvas></canvas>
+        <span class="spin__price" data-total>2,40 €</span><p class="spin__hint" aria-hidden="true">↔ Arrastra para girar</p>
+      </div>
+      <form class="config__form" data-config action="https://wa.me/34649189174" target="_blank">
+        <p class="eyebrow">Arma tu desayuno</p>
+        <h2 class="display display--md" data-split>Hazlo <em>a tu gusto.</em></h2>
+        <fieldset><legend class="legend">1. Elige tu café</legend><div class="opts">
+          <label class="opt"><input type="radio" name="base" value="Café con leche" data-price="1.9"><span>Con leche<small>1,90 €</small></span></label>
+          <label class="opt"><input type="radio" name="base" value="Capuccino" data-price="2.4" checked><span>Capuccino<small>2,40 €</small></span></label>
+          <label class="opt"><input type="radio" name="base" value="Flat White" data-price="2.6"><span>Flat White<small>2,60 €</small></span></label>
+        </div></fieldset>
+        <fieldset><legend class="legend">2. ¿Lo personalizamos?</legend><div class="chips">
+          <label class="chip"><input type="checkbox" name="extra" value="leche de avena" data-price="0.3"><span>Leche de avena +0,30</span></label>
+          <label class="chip"><input type="checkbox" name="extra" value="shot extra" data-price="0.5"><span>Shot extra +0,50</span></label>
+          <label class="chip"><input type="checkbox" name="extra" value="tostada con tomate y AOVE" data-price="2.2"><span>Tostada tomate y AOVE +2,20</span></label>
+          <label class="chip"><input type="checkbox" name="extra" value="croissant de mantequilla" data-price="1.8"><span>Croissant +1,80</span></label>
+        </div></fieldset>
+        <div class="qty-row"><span class="legend">3. ¿Cuántos?</span><div class="qty"><button type="button" data-qty="-1" aria-label="Quitar uno">−</button><output name="qty" aria-live="polite">1</output><button type="button" data-qty="1" aria-label="Añadir uno">+</button></div></div>
+        <button class="btn btn--accent btn--block" type="submit">Pedir por WhatsApp · <span data-total>2,40 €</span></button>
+        <p class="config__note">Te confirmamos por WhatsApp y lo recoges en barra.</p>
+      </form>
+    </div>
+  </section>
+
+  <!-- 5. PROCESO -->
+  <section class="panel hscroll" id="proceso" data-stack data-section="proceso">
+    <div class="hscroll__sticky">
+      <div class="container"><p class="eyebrow">Cómo lo hacemos</p><h2 class="display display--md" data-split>Del grano <em>a tu taza.</em></h2></div>
+      <div class="hscroll__track">
+        <article class="hcard"><div class="hcard__media"><img src="frames/hero/d/0010.webp" width="1280" height="960" alt="" loading="lazy" decoding="async"></div><h3><span>01</span>Elegimos el grano</h3><p>Arábica de especialidad, con fecha de tueste reciente.</p></article>
+        <article class="hcard"><div class="hcard__media"><img src="frames/hero/d/0042.webp" width="1280" height="960" alt="" loading="lazy" decoding="async"></div><h3><span>02</span>Molemos al momento</h3><p>18 g por espresso doble, ni uno más ni uno menos.</p></article>
+        <article class="hcard"><div class="hcard__media"><img src="frames/hero/d/0058.webp" width="1280" height="960" alt="" loading="lazy" decoding="async"></div><h3><span>03</span>Extraemos en 27 s</h3><p>A 93 °C, para sacar el dulzor sin amargor.</p></article>
+        <article class="hcard"><div class="hcard__media"><img src="frames/hero/d/0096.webp" width="1280" height="960" alt="" loading="lazy" decoding="async"></div><h3><span>04</span>Dibujamos la espuma</h3><p>Leche a 62 °C, sedosa, y un tulipán encima.</p></article>
+        <article class="hcard"><div class="hcard__media"><img src="img/tostada-foto.webp" width="480" height="600" alt="Tostada de aguacate con huevo poché" loading="lazy" decoding="async"></div><h3><span>05</span>Y algo rico al lado</h3><p>Tostadas de masa madre, croissants y bollería cada mañana.</p></article>
+        <div class="hcard hcard--cta"><h3 class="display">¿Te apetece ya?</h3><a class="btn btn--ink" href="#arma">Pedir ahora →</a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. PÓSTER -->
+  <section class="poster" aria-label="Nuestra promesa">
+    <h2 class="display echo" data-echo>Whānau es familia.<br>Y aquí lo eres.</h2>
+    <p class="fill-text" data-fill>Whānau significa familia en maorí. Por eso te llamamos por tu nombre, molemos cada café al momento, tenemos croissants recién hechos cada mañana y abrimos a las 7:30 para que el día empiece bien.</p>
+  </section>
+
+  <!-- 7. OPINIONES -->
+  <section class="panel panel--surface" id="opiniones" data-stack data-section="opiniones">
+    <div class="container">
+      <p class="eyebrow">Lo que dicen en Google</p>
+      <h2 class="display display--md" data-split>Vienen por el café. <em>Vuelven por la gente.</em></h2>
+      <div class="quotes" style="margin-top:2.5rem">
+        <blockquote class="quote" data-reveal>Buen ambiente, buen servicio y los camareros muy amables y atentos. El café de especialidad está espectacular y las tostadas son abundantes.<footer><b>Carlos M.</b>Reseña en Google</footer></blockquote>
+        <blockquote class="quote" data-reveal="1">Buen café y las tostadas insuperables. Recomendable 100 % si estás por Garrucha. El aguacate estaba en su punto perfecto.<footer><b>María Laura S.</b>Reseña en Google</footer></blockquote>
+        <blockquote class="quote" data-reveal="2">El café irlandés que sirven aquí es simplemente sublime. Un lugar acogedor en Calle Mayor al que siempre apetece volver.<footer><b>Antonio B.</b>Reseña en Google</footer></blockquote>
+        <div class="timeline" data-reveal="3">
+          <div><b data-count="4.4" data-decimals="1">4,4</b><span>valoración en Google</span></div>
+          <div><b data-count="53">53</b><span>opiniones publicadas</span></div>
+          <div><b data-count="7" data-suffix=" días">7 días</b><span>abiertos a la semana</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. PEDIDO POR WHATSAPP -->
+  <section class="panel" id="pedir" data-stack>
+    <div class="container split" style="align-items:center">
+      <div>
+        <p class="eyebrow">Pedir para llevar</p>
+        <h2 class="display display--md" data-split>Tu café, <em>sin hacer cola.</em></h2>
+        <p class="lead">Nos escribes por WhatsApp, te confirmamos al momento y lo recoges recién hecho en barra.</p>
+        <div class="features">
+          <div class="feature" data-reveal><b><span>01</span>Escribe</b>Arma tu pedido arriba o mándanos un mensaje.</div>
+          <div class="feature" data-reveal="1"><b><span>02</span>Te confirmamos</b>Respuesta rápida, con la hora de recogida.</div>
+          <div class="feature" data-reveal="2"><b><span>03</span>Lo preparamos</b>Molido y servido en el momento.</div>
+          <div class="feature" data-reveal="3"><b><span>04</span>Recoges</b>En Calle Mayor 150, sin esperar.</div>
+        </div>
+      </div>
+      <div class="phone-wrap" aria-hidden="true">
+        <div class="phone" data-float><div class="phone__screen">
+          <span class="logo" style="font-size:1rem">Whānau<i>.</i></span>
+          <p class="bubble bubble--me">Hola! 2 capuccinos con avena y una tostada de tomate 🙏</p>
+          <p class="bubble">¡Hola! Listo en 5 min. Total 7,60 €</p>
+          <div class="ui-card"><div class="ui-card__dark"><div><small>Pedido</small><strong>W-012</strong></div><span class="badge">5<br><small style="font-size:.55rem">min</small></span></div></div>
+          <span class="btn btn--accent" style="justify-content:center;margin-top:auto">Recoger en barra</span>
+        </div></div>
+        <div class="float float--toast" data-float="-1"><span class="dot"></span>Pedido confirmado</div>
+        <div class="float float--points" data-float="1.4">5 min<small>y listo</small></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. CTA + FOOTER -->
+  <section class="panel panel--surface" id="visitanos" data-stack data-section="visitanos">
+    <div class="container">
+      <div class="cta" data-reveal>
+        <div>
+          <p class="eyebrow" style="color:inherit">¿Te apetece?</p>
+          <h2 class="display display--md">Pásate hoy. <em>Te esperamos.</em></h2>
+          <p class="lead">Calle Mayor 150, Garrucha · <span data-status>Abrimos todos los días desde las 7:30</span></p>
+          <div class="hero__actions"><a class="btn btn--accent" href="https://wa.me/34649189174">Pedir por WhatsApp</a><a class="btn btn--ghost" href="#visitanos" data-open="reserva">Reservar mesa</a><a class="btn btn--ghost" href="https://maps.app.goo.gl/EyCHTfuHCbnLqPAU6" target="_blank" rel="noopener">Cómo llegar</a></div>
+        </div>
+        <img src="frames/hero/d/0090.webp" width="1280" height="960" alt="" loading="lazy" decoding="async">
+      </div>
+      <footer class="footer">
+        <div class="footer__cols">
+          <div><span class="logo">Whānau<i>.</i></span><p>Café de especialidad, desayunos y buena gente en Garrucha, Almería.</p></div>
+          <div><h3>Carta</h3><ul><li><a href="#carta">Cafés</a></li><li><a href="#arma">Arma tu desayuno</a></li><li><a href="#proceso">Cómo lo hacemos</a></li><li><a href="#opiniones">Opiniones</a></li></ul></div>
+          <div><h3>Horario</h3><ul class="hours"><li><span>Lun – Jue</span>7:30 – 22:00</li><li><span>Viernes</span>7:30 – 23:00</li><li><span>Sábado</span>8:00 – 23:00</li><li><span>Domingo</span>8:00 – 21:00</li></ul></div>
+          <div><h3>Contacto</h3><ul><li>Calle Mayor 150, 04630 Garrucha</li><li><a href="tel:+34649189174">649 18 91 74</a></li><li><a href="https://wa.me/34649189174">WhatsApp</a></li><li><a href="https://instagram.com/whanaucoffee" target="_blank" rel="noopener">Instagram</a></li></ul></div>
+        </div>
+        <p class="footer__legal">© <span data-year>2026</span> Whānau Coffee · Garrucha, Almería</p>
+        <p class="wordmark" aria-hidden="true" data-wordmark><span>Whānau</span></p>
+      </footer>
+    </div>
+  </section>
+</main>
+
+<!-- MODAL DE RESERVA -->
+<dialog class="modal" id="reserva" aria-labelledby="reserva-title" data-lenis-prevent>
+  <div class="modal__inner">
+    <aside class="modal__side">
+      <span class="logo">Whānau<i>.</i></span>
+      <ol class="modal__steps"><li class="is-on">Día</li><li>Hora y personas</li><li>Tus datos</li></ol>
+      <p class="modal__aside-note">Te confirmamos la mesa por WhatsApp. Terraza o dentro, según prefieras.</p>
+    </aside>
+    <form class="modal__main" data-booking novalidate>
+      <button type="button" class="icon-btn modal__close" data-close aria-label="Cerrar"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m4 4 8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>
+      <p class="eyebrow">Reserva · paso <span data-step-num>1</span> de 3</p>
+      <h2 id="reserva-title" class="display display--sm">Reserva <em>tu mesa.</em></h2>
+      <div class="pane" data-pane="0"><p class="legend">¿Qué día vienes?</p><div class="days" data-days></div></div>
+      <div class="pane" data-pane="1" hidden>
+        <p class="legend">¿A qué hora?</p>
+        <div class="times">
+          <button type="button" class="slot" data-time="8:30" aria-pressed="false">8:30</button>
+          <button type="button" class="slot" data-time="9:30" aria-pressed="false">9:30</button>
+          <button type="button" class="slot" data-time="10:30" aria-pressed="false">10:30</button>
+          <button type="button" class="slot" data-time="11:30" aria-pressed="false">11:30</button>
+          <button type="button" class="slot" data-time="13:30" aria-pressed="false">13:30</button>
+          <button type="button" class="slot" data-time="17:00" aria-pressed="false">17:00</button>
+          <button type="button" class="slot" data-time="19:00" aria-pressed="false">19:00</button>
+          <button type="button" class="slot" data-time="20:30" aria-pressed="false">20:30</button>
+        </div>
+        <div class="qty-row"><span class="legend">Personas</span><div class="qty"><button type="button" data-qty="-1" aria-label="Una persona menos">−</button><output name="people" aria-live="polite">2</output><button type="button" data-qty="1" aria-label="Una persona más">+</button></div></div>
+      </div>
+      <div class="pane" data-pane="2" hidden>
+        <label class="field">Nombre<input name="nombre" autocomplete="name" required></label>
+        <label class="field">Teléfono<input name="telefono" type="tel" autocomplete="tel" inputmode="tel" required></label>
+        <p class="summary" data-summary></p>
+      </div>
+      <p class="form-msg" role="alert" data-msg></p>
+      <div class="modal__nav"><button type="button" class="btn btn--ghost btn--sm" data-back>Atrás</button><button type="submit" class="btn btn--accent btn--sm" data-next>Siguiente</button></div>
+    </form>
+  </div>
+</dialog>
+
+<a class="wa" href="https://wa.me/34649189174" aria-label="Pedir por WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3Z"/></svg></a>
+<div class="toast" role="status" aria-live="polite"></div>
+<script src="js/main.js" defer></script>
+</body>
 </html>
-
